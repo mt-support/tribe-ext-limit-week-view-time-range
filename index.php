@@ -1,21 +1,17 @@
 <?php
 /**
- * Plugin Name:     The Events Calendar PRO Extension: Limit Time Range in Week View
- * Plugin URI:      https://theeventscalendar.com/extensions/events-calendar-pro-limit-time-range-in-week-view
- * Description:     Adds option to WP Admin > Events > Settings > Display to set up the hour range shown on the week view.
- * Version:         1.0.0
- * Extension Class: Tribe__Extension__Limit_Week_View_Time_Range
- * Author:          Modern Tribe, Inc.
- * Author URI:      http://m.tri.be/1971
- * License:         GPL version 3 or any later version
- * License URI:     https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:     tribe-ext-limit-week-view-time-range
+ * Plugin Name:			The Events Calendar PRO Extension: Limit Time Range in Week View
+ * Plugin URI:      	https://theeventscalendar.com/extensions/events-calendar-pro-limit-time-range-in-week-view
+ * GitHub Plugin URI:	https://github.com/mt-support/tribe-ext-limit-week-view-time-range
+ * Description:     	Adds option to WP Admin > Events > Settings > Display to set up the hour range shown on the week view.
+ * Version:         	1.0.0
+ * Extension Class: 	Tribe__Extension__Limit_Week_View_Time_Range
+ * Author:          	Modern Tribe, Inc.
+ * Author URI:      	http://m.tri.be/1971
+ * License:         	GPL version 3 or any later version
+ * License URI:     	https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain:     	tribe-ext-limit-week-view-time-range
  */
-
-// Do not load directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	die( '-1' );
-}
 
 // Do not load unless Tribe Common is fully loaded.
 if ( ! class_exists( 'Tribe__Extension' ) ) {
@@ -41,13 +37,6 @@ class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
 		$this->set_url( 'https://theeventscalendar.com/extensions/events-calendar-pro-limit-time-range-in-week-view/' );
 	}
 
-    /**
-     * Load textdomain
-     */
-    function tdm_fontawesome_for_divi_load_plugin_textdomain() {
-        load_plugin_textdomain( 'tribe-ext-limit-week-view-time-range', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
-    }
-
 	/**
 	 * Adds settings options
 	 */
@@ -56,17 +45,17 @@ class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
 
 		$start_hours = array(
 			0 => '00:00', 1 => '01:00', 2 => '02:00', 3 => '03:00', 4 => '04:00',
-		    5 => '05:00', 6 => '06:00', 7 => '07:00', 8 => '08:00', 9 => '09:00',
-		    10 => '10:00', 11 => '11:00', 12 => '12:00', 13 => '13:00', 14 => '14:00',
-		    15 => '15:00', 16 => '16:00', 17 => '17:00', 18 => '18:00', 19 => '19:00',
-		    20 => '20:00', 21 => '21:00', 22 => '22:00', 23 => '23:00'
+			5 => '05:00', 6 => '06:00', 7 => '07:00', 8 => '08:00', 9 => '09:00',
+			10 => '10:00', 11 => '11:00', 12 => '12:00', 13 => '13:00', 14 => '14:00',
+			15 => '15:00', 16 => '16:00', 17 => '17:00', 18 => '18:00', 19 => '19:00',
+			20 => '20:00', 21 => '21:00', 22 => '22:00', 23 => '23:00'
 		);
 		$end_hours = array(
 			1 => '01:00', 2 => '02:00', 3 => '03:00', 4 => '04:00',
-		    5 => '05:00', 6 => '06:00', 7 => '07:00', 8 => '08:00', 9 => '09:00',
-		    10 => '10:00', 11 => '11:00', 12 => '12:00', 13 => '13:00', 14 => '14:00',
-		    15 => '15:00', 16 => '16:00', 17 => '17:00', 18 => '18:00', 19 => '19:00',
-		    20 => '20:00', 21 => '21:00', 22 => '22:00', 23 => '23:00', 24 => '23:59'
+			5 => '05:00', 6 => '06:00', 7 => '07:00', 8 => '08:00', 9 => '09:00',
+			10 => '10:00', 11 => '11:00', 12 => '12:00', 13 => '13:00', 14 => '14:00',
+			15 => '15:00', 16 => '16:00', 17 => '17:00', 18 => '18:00', 19 => '19:00',
+			20 => '20:00', 21 => '21:00', 22 => '22:00', 23 => '23:00', 24 => '23:59'
 		);
 
 		$setting_helper = new Tribe__Settings_Helper();
@@ -84,7 +73,6 @@ class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
 				'type'            => 'dropdown',
 				'options'         => $start_hours,
 				'label'           => esc_html__( 'Start hour', 'tribe-ext-limit-week-view-time-range' ),
-				//'default'         => esc_attr__( '0', 'tribe-ext-limit-week-view-time-range' ),
 				'tooltip'         => '00:00-23:00',
 				'validation_type' => 'html',
 			),
@@ -92,7 +80,6 @@ class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
 				'type'            => 'dropdown',
 				'options'         => $end_hours,
 				'label'           => esc_html__( 'End hour', 'tribe-ext-limit-week-view-time-range' ),
-				//'default'         => esc_attr__( '3', 'tribe-ext-limit-week-view-time-range' ),
 				'tooltip'         => '01:00-23:59',
 				'validation_type' => 'html',
 			),
@@ -110,7 +97,7 @@ class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
 	 * Extension initialization and hooks.
 	 */
 	public function init() {
-        //add_action( 'plugins_loaded', 'tribe_ext_rsvp_load_plugin_textdomain' );
+        
         load_plugin_textdomain( 'tribe-ext-limit-week-view-time-range', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 
 		add_action( 'admin_init', array( $this, 'add_settings' ) );
@@ -132,16 +119,19 @@ class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
         $end_of_day = tribe_get_option( $this->opts_prefix . 'end_time' );
 
         // Fallback
-        if ( ! is_numeric( $start_of_day ) || $start_of_day < 0 || $start_of_day > 23 ) $start_of_day = 0;
-        if ( ! is_numeric( $end_of_day ) || $end_of_day < 1 || $end_of_day > 23 || $end_of_day < $start_of_day ) $end_of_day = 24;
+        if ( ! is_numeric( $start_of_day ) || $start_of_day < 0 || $start_of_day > 23 ) {
+			$start_of_day = 0;
+		}
+        if ( ! is_numeric( $end_of_day ) || $end_of_day < 1 || $end_of_day > 23 || $end_of_day < $start_of_day ) {
+			$end_of_day = 24;
+		}
 
         $hour = 0;
 
-        foreach ( $hours as $key => $formatted_hour ) {
+        foreach ( $hours as $hour => $formatted_hour ) {
             if ( $hour < $start_of_day || $hour >= $end_of_day ) {
                 unset( $hours[ $hour ] );
             }
-            $hour ++;
         }
         return $hours;
     }
