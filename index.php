@@ -1,16 +1,16 @@
 <?php
 /**
  * Plugin Name:			The Events Calendar PRO Extension: Limit Time Range in Week View
- * Plugin URI:      	https://theeventscalendar.com/extensions/events-calendar-pro-limit-time-range-in-week-view
+ * Plugin URI:			https://theeventscalendar.com/extensions/events-calendar-pro-limit-time-range-in-week-view
  * GitHub Plugin URI:	https://github.com/mt-support/tribe-ext-limit-week-view-time-range
- * Description:     	Adds option to WP Admin > Events > Settings > Display to set up the hour range shown on the week view.
- * Version:         	1.0.0
- * Extension Class: 	Tribe__Extension__Limit_Week_View_Time_Range
- * Author:          	Modern Tribe, Inc.
- * Author URI:      	http://m.tri.be/1971
- * License:         	GPL version 3 or any later version
- * License URI:     	https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:     	tribe-ext-limit-week-view-time-range
+ * Description:			Adds option to WP Admin > Events > Settings > Display to set up the hour range shown on the week view.
+ * Version:				1.0.0
+ * Extension Class:		Tribe__Extension__Limit_Week_View_Time_Range
+ * Author:				Modern Tribe, Inc.
+ * Author URI:			http://m.tri.be/1971
+ * License:				GPL version 3 or any later version
+ * License URI:			https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain:			tribe-ext-limit-week-view-time-range
  */
 
 // Do not load unless Tribe Common is fully loaded.
@@ -97,13 +97,9 @@ class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
 	 * Extension initialization and hooks.
 	 */
 	public function init() {
-        
-        load_plugin_textdomain( 'tribe-ext-limit-week-view-time-range', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
-
+		load_plugin_textdomain( 'tribe-ext-limit-week-view-time-range', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 		add_action( 'admin_init', array( $this, 'add_settings' ) );
-
-        add_filter( 'tribe_events_week_get_hours', array( $this, 'filter_week_hours' ) );
-
+		add_filter( 'tribe_events_week_get_hours', array( $this, 'filter_week_hours' ) );
 	}
 
 	/**
@@ -114,41 +110,24 @@ class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
 	 */
 	public function filter_week_hours( $hours ) {
 
-        // Set the desired times here, pulls from settings
-        $start_of_day = tribe_get_option( $this->opts_prefix . 'start_time' );
-        $end_of_day = tribe_get_option( $this->opts_prefix . 'end_time' );
+		// Set the desired times here, pulls from settings
+		$start_of_day = tribe_get_option( $this->opts_prefix . 'start_time' );
+		$end_of_day = tribe_get_option( $this->opts_prefix . 'end_time' );
 
-        // Fallback
-        if ( ! is_numeric( $start_of_day ) || $start_of_day < 0 || $start_of_day > 23 ) {
+		// Fallback
+		if ( ! is_numeric( $start_of_day ) || $start_of_day < 0 || $start_of_day > 23 ) {
 			$start_of_day = 0;
 		}
-        if ( ! is_numeric( $end_of_day ) || $end_of_day < 1 || $end_of_day > 23 || $end_of_day < $start_of_day ) {
+		if ( ! is_numeric( $end_of_day ) || $end_of_day < 1 || $end_of_day > 23 || $end_of_day < $start_of_day ) {
 			$end_of_day = 24;
 		}
 
-        $hour = 0;
-
-        foreach ( $hours as $hour => $formatted_hour ) {
-            if ( $hour < $start_of_day || $hour >= $end_of_day ) {
-                unset( $hours[ $hour ] );
-            }
-        }
-        return $hours;
-    }
-
-	/**
-	 * Get an HTML link to the Display settings tab
-	 *
-	 * @return string HTML link element to the Display settings tab
-	 */
-/*	protected function display_settings_tab_link() {
-		$url = Tribe__Settings::instance()->get_url( array( 'tab' => 'display' ) );
-
-		return sprintf(
-			'<a href="%1$s">%2$s</a>',
-			esc_url( $url ),
-			esc_html__( 'Display', 'tribe-ext-limit-week-view-time-range' )
-		);
-	}*/
+		foreach ( $hours as $hour => $formatted_hour ) {
+			if ( $hour < $start_of_day || $hour >= $end_of_day ) {
+				unset( $hours[ $hour ] );
+			}
+		}
+		return $hours;
+	}
 
 }
