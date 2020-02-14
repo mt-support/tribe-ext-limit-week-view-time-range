@@ -41,7 +41,9 @@ class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
 	 * Adds settings options
 	 */
 	public function add_settings() {
-		require_once dirname( __FILE__ ) . '/src/Tribe/Settings_Helper.php';
+		if ( ! class_exists( 'Tribe__Extension__Settings_Helper' ) ) {
+			require_once dirname( __FILE__ ) . '/src/Tribe/Settings_Helper.php';
+		}
 
 		$start_hours = array(
 			0 => '00:00', 1 => '01:00', 2 => '02:00', 3 => '03:00', 4 => '04:00',
