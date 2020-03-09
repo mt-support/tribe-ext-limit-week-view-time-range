@@ -37,7 +37,7 @@ We're always interested in your feedback and our [premium forums](https://theeve
 
 = 1.0.1 2020-02-14 =
 
-* Fixed class check for Settings_Helper in order to make it work next to other extensions.
+* Fix - Add check for `Settings_Helper` class already loaded in order to not conflict with other extensions.
 
 = 1.0.0 2018-05-18 =
 
