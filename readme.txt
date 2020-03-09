@@ -3,7 +3,7 @@ Contributors: ModernTribe
 Donate link: http://m.tri.be/29
 Tags: events, calendar
 Requires at least: 4.5
-Tested up to: 4.9.6
+Tested up to: 5.3.2
 Requires PHP: 5.6
 Stable tag: 1.0.1
 License: GPL version 3 or any later version
