@@ -5,13 +5,19 @@
  * GitHub Plugin URI: https://github.com/mt-support/tribe-ext-limit-week-view-time-range
  * Description:       Adds option to WP Admin > Events > Settings > Display to set up the hour range shown on the week view.
  * Version:           1.0.1
- * Extension Class:   Tribe__Extension__Limit_Week_View_Time_Range
+ * Extension Class:   Tribe\Extensions\Limit_Week_View_Time_Range\Main
  * Author:            Modern Tribe, Inc.
  * Author URI:        http://m.tri.be/1971
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       tribe-ext-limit-week-view-time-range
  */
+
+namespace Tribe\Extensions\Limit_Week_View_Time_Range;
+
+use Tribe__Autoloader;
+use Tribe__Dependency;
+use Tribe__Extension;
 
 // Do not load unless Tribe Common is fully loaded.
 if ( ! class_exists( 'Tribe__Extension' ) ) {
