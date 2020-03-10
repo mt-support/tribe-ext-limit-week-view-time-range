@@ -170,6 +170,8 @@ if (
 
 			$this->class_loader();
 
+			$this->get_settings();
+
 			add_action( 'admin_init', array( $this, 'add_settings' ) );
 			add_filter( 'tribe_events_week_get_hours', array( $this, 'filter_week_hours' ) );
 		}
@@ -244,6 +246,19 @@ if (
 			$this->class_loader->register_autoloader();
 
 			return $this->class_loader;
+		}
+
+		/**
+		 * Get Settings instance.
+		 *
+		 * @return Settings
+		 */
+		private function get_settings() {
+			if ( empty( $this->settings ) ) {
+				$this->settings = new Settings( $this->get_options_prefix() );
+			}
+
+			return $this->settings;
 		}
 
 		/**
