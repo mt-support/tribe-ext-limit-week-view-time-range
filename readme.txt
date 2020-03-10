@@ -15,6 +15,8 @@ Easily limit the visible time range in week view.
 
 Activating this extension will give you the possibility to set which time range is shown in the week view.
 
+Please note, this extension works only with the legacy (V1) views. It does NOT support the redesigned (V2) views.
+
 == Installation ==
 
 Install and activate like any other plugin!
