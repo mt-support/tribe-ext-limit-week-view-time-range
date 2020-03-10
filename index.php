@@ -70,8 +70,6 @@ if (
 		 *
 		 * Settings_Helper will append a trailing underscore before each option.
 		 *
-		 * TODO: Remove if not using Settings.
-		 *
 		 * @see \Tribe\Extensions\Example\Settings::set_options_prefix()
 		 *
 		 * @return string
@@ -162,8 +160,6 @@ if (
 
 		/**
 		 * Use Tribe Autoloader for all class files within this namespace in the 'src' directory.
-		 *
-		 * TODO: Delete this method and its usage throughout this file if there is no `src` directory, such as if there are no settings being added to the admin UI.
 		 *
 		 * @return Tribe__Autoloader
 		 */

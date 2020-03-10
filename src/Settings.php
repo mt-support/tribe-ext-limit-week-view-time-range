@@ -29,8 +29,6 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Settings constructor.
 		 *
-		 * TODO: Update this entire class for your needs, or remove the entire `src` directory this file is in and do not load it in the main plugin file.
-		 *
 		 * @param string $options_prefix Recommended: the plugin text domain, with hyphens converted to underscores.
 		 */
 		public function __construct( $options_prefix ) {
@@ -190,10 +188,8 @@ if ( ! class_exists( Settings::class ) ) {
 		}
 
 		/**
-		 * Adds a new section of fields to Events > Settings > General tab, appearing after the "Map Settings" section
-		 * and before the "Miscellaneous Settings" section.
-		 *
-		 * TODO: Move it to where you want and update this docblock. If you like it here, just delete this TODO.
+		 * Adds a new section of fields to Events > Settings > Display tab, appearing after the "Basic Template" section
+		 * and before the "Date Format Settings" section.
 		 */
 		public function add_settings() {
 			$start_hours = [
@@ -250,12 +246,10 @@ if ( ! class_exists( Settings::class ) ) {
 			];
 
 			$fields = [
-				// TODO: Settings heading start. Remove this element if not needed. Also remove the corresponding `get_example_intro_text()` method below.
 				'heading'   => [
 					'type' => 'html',
-					'html' => $this->get_example_intro_text(),
+					'html' => $this->get_setting_intro_text(),
 				],
-				// TODO: Settings heading end.
 				'start_time'  => [
 					'type'            => 'dropdown',
 					'options'         => $start_hours,
@@ -303,11 +297,9 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Here is an example of getting some HTML for the Settings Header.
 		 *
-		 * TODO: Delete this method if you do not need a heading for your settings. Also remove the corresponding element in the the $fields array in the `add_settings()` method above.
-		 *
 		 * @return string
 		 */
-		private function get_example_intro_text() {
+		private function get_setting_intro_text() {
 			$result = '<h3>' . esc_html_x( 'Limit Week View Time Range', 'Settings header', PLUGIN_TEXT_DOMAIN ) . '</h3>';
 			$result .= '<div style="margin-left: 20px;">';
 			$result .= '<p>';
