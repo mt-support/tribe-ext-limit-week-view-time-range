@@ -1,6 +1,6 @@
 <?php
 
-namespace Tribe\Extensions\Example;
+namespace Tribe\Extensions\Limit_Week_View_Time_Range;
 
 use Tribe__Settings_Manager;
 

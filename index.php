@@ -183,6 +183,17 @@ if (
 		}
 
 		/**
+		 * Get all of this extension's options.
+		 *
+		 * @return array
+		 */
+		public function get_all_options() {
+			$settings = $this->get_settings();
+
+			return $settings->get_all_options();
+		}
+
+		/**
 		 * Filters the hours
 		 *
 		 * @param $hours
@@ -191,9 +202,11 @@ if (
 		 */
 		public function filter_week_hours( $hours ) {
 
+			$options = $this->get_all_options();
+
 			// Set the desired times here, pulls from settings
-			$start_of_day = tribe_get_option( $this->opts_prefix . 'start_time' );
-			$end_of_day   = tribe_get_option( $this->opts_prefix . 'end_time' );
+			$start_of_day = $options['start_time'];
+			$end_of_day   = $options['end_time'];
 
 			// Fallback
 			if ( ! is_numeric( $start_of_day ) || $start_of_day < 0 || $start_of_day > 23 ) {
