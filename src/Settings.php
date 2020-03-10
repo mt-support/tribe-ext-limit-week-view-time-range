@@ -303,7 +303,10 @@ if ( ! class_exists( Settings::class ) ) {
 			$result = '<h3>' . esc_html_x( 'Limit Week View Time Range', 'Settings header', PLUGIN_TEXT_DOMAIN ) . '</h3>';
 			$result .= '<div style="margin-left: 20px;">';
 			$result .= '<p>';
-			$result .= esc_html_x( 'Set up the time range your week view should show. The start hour should be lower than the end hour.', 'Settings', PLUGIN_TEXT_DOMAIN );
+			$result .= esc_html_x( 'Set up the time range your week view should show. The start hour should be earlier than the end hour.', 'Settings', PLUGIN_TEXT_DOMAIN );
+			$result .= '</p>';
+			$result .= '<p>';
+			$result .= esc_html_x( 'It is recommended to have at least 8-9 hours between the start hour and the end hour.', 'Settings', PLUGIN_TEXT_DOMAIN );
 			$result .= '</p>';
 			$result .= '</div>';
 
