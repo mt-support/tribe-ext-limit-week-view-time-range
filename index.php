@@ -94,97 +94,6 @@ if (
 		}
 
 		/**
-		 * Adds settings options
-		 */
-		public function add_settings() {
-			if ( ! class_exists( 'Tribe__Extension__Settings_Helper' ) ) {
-				require_once dirname( __FILE__ ) . '/src/Tribe/Settings_Helper.php';
-			}
-
-			$start_hours = [
-				0  => '00:00',
-				1  => '01:00',
-				2  => '02:00',
-				3  => '03:00',
-				4  => '04:00',
-				5  => '05:00',
-				6  => '06:00',
-				7  => '07:00',
-				8  => '08:00',
-				9  => '09:00',
-				10 => '10:00',
-				11 => '11:00',
-				12 => '12:00',
-				13 => '13:00',
-				14 => '14:00',
-				15 => '15:00',
-				16 => '16:00',
-				17 => '17:00',
-				18 => '18:00',
-				19 => '19:00',
-				20 => '20:00',
-				21 => '21:00',
-				22 => '22:00',
-				23 => '23:00'
-			];
-			$end_hours   = [
-				1  => '01:00',
-				2  => '02:00',
-				3  => '03:00',
-				4  => '04:00',
-				5  => '05:00',
-				6  => '06:00',
-				7  => '07:00',
-				8  => '08:00',
-				9  => '09:00',
-				10 => '10:00',
-				11 => '11:00',
-				12 => '12:00',
-				13 => '13:00',
-				14 => '14:00',
-				15 => '15:00',
-				16 => '16:00',
-				17 => '17:00',
-				18 => '18:00',
-				19 => '19:00',
-				20 => '20:00',
-				21 => '21:00',
-				22 => '22:00',
-				23 => '23:00',
-				24 => '23:59'
-			];
-
-			$setting_helper = new Tribe__Settings_Helper();
-
-			$fields = [
-				$this->opts_prefix . 'heading'     => [
-					'type' => 'html',
-					'html' => '<h3>' . esc_html__( 'Limit Week View Time Range', 'PLUGIN_TEXT_DOMAIN' ) . '</h3>',
-				],
-				$this->opts_prefix . 'helper_text' => [
-					'type' => 'html',
-					'html' => '<p>' . esc_html__( 'Set up the time range your week view should show. The start hour should be lower than the end hour.', 'PLUGIN_TEXT_DOMAIN' ) . '</p>',
-				],
-				$this->opts_prefix . 'start_time'  => [
-					'type'            => 'dropdown',
-					'options'         => $start_hours,
-					'label'           => esc_html__( 'Start hour', 'PLUGIN_TEXT_DOMAIN' ),
-					'tooltip'         => '00:00-23:00',
-					'validation_type' => 'html',
-				],
-				$this->opts_prefix . 'end_time'    => [
-					'type'            => 'dropdown',
-					'options'         => $end_hours,
-					'label'           => esc_html__( 'End hour', 'PLUGIN_TEXT_DOMAIN' ),
-					'tooltip'         => '01:00-23:59',
-					'validation_type' => 'html',
-				],
-			];
-
-			$setting_helper->add_fields( $fields, 'display', 'enable_month_view_cache', false );
-		}
-
-		/**
 		 * Extension initialization and hooks.
 		 */
 		public function init() {
@@ -198,7 +107,6 @@ if (
 
 			$this->get_settings();
 
-			add_action( 'admin_init', [ $this, 'add_settings' ] );
 			add_filter( 'tribe_events_week_get_hours', [ $this, 'filter_week_hours' ] );
 		}
 

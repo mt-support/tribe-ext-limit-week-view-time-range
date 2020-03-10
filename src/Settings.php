@@ -38,9 +38,6 @@ if ( ! class_exists( Settings::class ) ) {
 
 			$this->set_options_prefix( $options_prefix );
 
-			// Remove settings specific to Google Maps
-			add_action( 'admin_init', [ $this, 'remove_settings' ] );
-
 			// Add settings specific to OSM
 			add_action( 'admin_init', [ $this, 'add_settings' ] );
 		}
@@ -193,45 +190,93 @@ if ( ! class_exists( Settings::class ) ) {
 		}
 
 		/**
-		 * Here is an example of removing settings from Events > Settings > General tab > "Map Settings" section
-		 * that are specific to Google Maps.
-		 */
-		public function remove_settings() {
-			// "Enable Google Maps" checkbox
-			$this->settings_helper->remove_field( 'embedGoogleMaps', 'general' );
-			// "Map view search distance limit" (default of 25)
-			$this->settings_helper->remove_field( 'geoloc_default_geofence', 'general' );
-			// "Google Maps default zoom level" (0-21, default of 10)
-			$this->settings_helper->remove_field( 'embedGoogleMapsZoom', 'general' );
-		}
-
-		/**
 		 * Adds a new section of fields to Events > Settings > General tab, appearing after the "Map Settings" section
 		 * and before the "Miscellaneous Settings" section.
 		 *
 		 * TODO: Move it to where you want and update this docblock. If you like it here, just delete this TODO.
 		 */
 		public function add_settings() {
+			$start_hours = [
+				0  => '00:00',
+				1  => '01:00',
+				2  => '02:00',
+				3  => '03:00',
+				4  => '04:00',
+				5  => '05:00',
+				6  => '06:00',
+				7  => '07:00',
+				8  => '08:00',
+				9  => '09:00',
+				10 => '10:00',
+				11 => '11:00',
+				12 => '12:00',
+				13 => '13:00',
+				14 => '14:00',
+				15 => '15:00',
+				16 => '16:00',
+				17 => '17:00',
+				18 => '18:00',
+				19 => '19:00',
+				20 => '20:00',
+				21 => '21:00',
+				22 => '22:00',
+				23 => '23:00'
+			];
+			$end_hours   = [
+				1  => '01:00',
+				2  => '02:00',
+				3  => '03:00',
+				4  => '04:00',
+				5  => '05:00',
+				6  => '06:00',
+				7  => '07:00',
+				8  => '08:00',
+				9  => '09:00',
+				10 => '10:00',
+				11 => '11:00',
+				12 => '12:00',
+				13 => '13:00',
+				14 => '14:00',
+				15 => '15:00',
+				16 => '16:00',
+				17 => '17:00',
+				18 => '18:00',
+				19 => '19:00',
+				20 => '20:00',
+				21 => '21:00',
+				22 => '22:00',
+				23 => '23:00',
+				24 => '23:59'
+			];
+
 			$fields = [
 				// TODO: Settings heading start. Remove this element if not needed. Also remove the corresponding `get_example_intro_text()` method below.
-				'Example'   => [
+				'heading'   => [
 					'type' => 'html',
 					'html' => $this->get_example_intro_text(),
 				],
 				// TODO: Settings heading end.
-				'a_setting' => [ // TODO
-					'type'            => 'text',
-					'label'           => esc_html__( 'xxx try this', PLUGIN_TEXT_DOMAIN ),
-					'tooltip'         => sprintf( esc_html__( 'Enter your custom URL, including "http://" or "https://", for example %s.', PLUGIN_TEXT_DOMAIN ), '<code>https://wpshindig.com/events/</code>' ),
+				'start_time'  => [
+					'type'            => 'dropdown',
+					'options'         => $start_hours,
+					'label'           => esc_html__( 'Start hour', 'PLUGIN_TEXT_DOMAIN' ),
+					'tooltip'         => '00:00-23:00',
+					'validation_type' => 'html',
+				],
+				'end_time'    => [
+					'type'            => 'dropdown',
+					'options'         => $end_hours,
+					'label'           => esc_html__( 'End hour', 'PLUGIN_TEXT_DOMAIN' ),
+					'tooltip'         => '01:00-23:59',
 					'validation_type' => 'html',
 				],
 			];
 
 			$this->settings_helper->add_fields(
 				$this->prefix_settings_field_keys( $fields ),
-				'general',
-				'tribeEventsMiscellaneousTitle',
-				true
+				'display',
+				'enable_month_view_cache',
+				false
 			);
 		}
 
@@ -263,10 +308,10 @@ if ( ! class_exists( Settings::class ) ) {
 		 * @return string
 		 */
 		private function get_example_intro_text() {
-			$result = '<h3>' . esc_html_x( 'Example Extension Setup', 'Settings header', PLUGIN_TEXT_DOMAIN ) . '</h3>';
+			$result = '<h3>' . esc_html_x( 'Limit Week View Time Range', 'Settings header', PLUGIN_TEXT_DOMAIN ) . '</h3>';
 			$result .= '<div style="margin-left: 20px;">';
 			$result .= '<p>';
-			$result .= esc_html_x( 'Some text here about this settings section.', 'Settings', PLUGIN_TEXT_DOMAIN );
+			$result .= esc_html_x( 'Set up the time range your week view should show. The start hour should be lower than the end hour.', 'Settings', PLUGIN_TEXT_DOMAIN );
 			$result .= '</p>';
 			$result .= '</div>';
 
