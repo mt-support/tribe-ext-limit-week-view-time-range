@@ -43,6 +43,16 @@ if (
 	 */
 	class Main extends Tribe__Extension {
 
+		/**
+		 * @var Tribe__Autoloader
+		 */
+		private $class_loader;
+
+		/**
+		 * @var Settings
+		 */
+		private $settings;
+
 		protected $opts_prefix = 'tribe_ext_lwh_opts_';
 
 		/**
