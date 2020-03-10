@@ -101,7 +101,7 @@ if (
 				require_once dirname( __FILE__ ) . '/src/Tribe/Settings_Helper.php';
 			}
 
-			$start_hours = array(
+			$start_hours = [
 				0  => '00:00',
 				1  => '01:00',
 				2  => '02:00',
@@ -126,8 +126,8 @@ if (
 				21 => '21:00',
 				22 => '22:00',
 				23 => '23:00'
-			);
-			$end_hours   = array(
+			];
+			$end_hours   = [
 				1  => '01:00',
 				2  => '02:00',
 				3  => '03:00',
@@ -152,34 +152,34 @@ if (
 				22 => '22:00',
 				23 => '23:00',
 				24 => '23:59'
-			);
+			];
 
 			$setting_helper = new Tribe__Settings_Helper();
 
-			$fields = array(
-				$this->opts_prefix . 'heading'     => array(
+			$fields = [
+				$this->opts_prefix . 'heading'     => [
 					'type' => 'html',
 					'html' => '<h3>' . esc_html__( 'Limit Week View Time Range', 'PLUGIN_TEXT_DOMAIN' ) . '</h3>',
-				),
-				$this->opts_prefix . 'helper_text' => array(
+				],
+				$this->opts_prefix . 'helper_text' => [
 					'type' => 'html',
 					'html' => '<p>' . esc_html__( 'Set up the time range your week view should show. The start hour should be lower than the end hour.', 'PLUGIN_TEXT_DOMAIN' ) . '</p>',
-				),
-				$this->opts_prefix . 'start_time'  => array(
+				],
+				$this->opts_prefix . 'start_time'  => [
 					'type'            => 'dropdown',
 					'options'         => $start_hours,
 					'label'           => esc_html__( 'Start hour', 'PLUGIN_TEXT_DOMAIN' ),
 					'tooltip'         => '00:00-23:00',
 					'validation_type' => 'html',
-				),
-				$this->opts_prefix . 'end_time'    => array(
+				],
+				$this->opts_prefix . 'end_time'    => [
 					'type'            => 'dropdown',
 					'options'         => $end_hours,
 					'label'           => esc_html__( 'End hour', 'PLUGIN_TEXT_DOMAIN' ),
 					'tooltip'         => '01:00-23:59',
 					'validation_type' => 'html',
-				),
-			);
+				],
+			];
 
 			$setting_helper->add_fields( $fields, 'display', 'enable_month_view_cache', false );
 		}
@@ -198,8 +198,8 @@ if (
 
 			$this->get_settings();
 
-			add_action( 'admin_init', array( $this, 'add_settings' ) );
-			add_filter( 'tribe_events_week_get_hours', array( $this, 'filter_week_hours' ) );
+			add_action( 'admin_init', [ $this, 'add_settings' ] );
+			add_filter( 'tribe_events_week_get_hours', [ $this, 'filter_week_hours' ] );
 		}
 
 		/**
