@@ -40,7 +40,7 @@ if ( ! class_exists( 'Tribe__Extension' ) ) {
 /**
  * Extension main class, class begins loading on init() function.
  */
-class Tribe__Extension__Limit_Week_View_Time_Range extends Tribe__Extension {
+class Main extends Tribe__Extension {
 
 	protected $opts_prefix = 'tribe_ext_lwh_opts_';
 
