@@ -183,19 +183,6 @@ if (
 		}
 
 		/**
-		 * Get Settings instance.
-		 *
-		 * @return Settings
-		 */
-		private function get_settings() {
-			if ( empty( $this->settings ) ) {
-				$this->settings = new Settings( $this->get_options_prefix() );
-			}
-
-			return $this->settings;
-		}
-
-		/**
 		 * Filters the hours
 		 *
 		 * @param $hours
