@@ -168,6 +168,8 @@ if (
 				return;
 			}
 
+			$this->class_loader();
+
 			add_action( 'admin_init', array( $this, 'add_settings' ) );
 			add_filter( 'tribe_events_week_get_hours', array( $this, 'filter_week_hours' ) );
 		}
@@ -220,6 +222,28 @@ if (
 			}
 
 			return true;
+		}
+
+		/**
+		 * Use Tribe Autoloader for all class files within this namespace in the 'src' directory.
+		 *
+		 * TODO: Delete this method and its usage throughout this file if there is no `src` directory, such as if there are no settings being added to the admin UI.
+		 *
+		 * @return Tribe__Autoloader
+		 */
+		public function class_loader() {
+			if ( empty( $this->class_loader ) ) {
+				$this->class_loader = new Tribe__Autoloader;
+				$this->class_loader->set_dir_separator( '\\' );
+				$this->class_loader->register_prefix(
+					NS,
+					__DIR__ . DIRECTORY_SEPARATOR . 'src'
+				);
+			}
+
+			$this->class_loader->register_autoloader();
+
+			return $this->class_loader;
 		}
 
 		/**
