@@ -133,23 +133,23 @@ if (
 			$fields = array(
 				$this->opts_prefix . 'heading'     => array(
 					'type' => 'html',
-					'html' => '<h3>' . esc_html__( 'Limit Week View Time Range', 'tribe-ext-limit-week-view-time-range' ) . '</h3>',
+					'html' => '<h3>' . esc_html__( 'Limit Week View Time Range', 'PLUGIN_TEXT_DOMAIN' ) . '</h3>',
 				),
 				$this->opts_prefix . 'helper_text' => array(
 					'type' => 'html',
-					'html' => '<p>' . esc_html__( 'Set up the time range your week view should show. The start hour should be lower than the end hour.', 'tribe-ext-limit-week-view-time-range' ) . '</p>',
+					'html' => '<p>' . esc_html__( 'Set up the time range your week view should show. The start hour should be lower than the end hour.', 'PLUGIN_TEXT_DOMAIN' ) . '</p>',
 				),
 				$this->opts_prefix . 'start_time'  => array(
 					'type'            => 'dropdown',
 					'options'         => $start_hours,
-					'label'           => esc_html__( 'Start hour', 'tribe-ext-limit-week-view-time-range' ),
+					'label'           => esc_html__( 'Start hour', 'PLUGIN_TEXT_DOMAIN' ),
 					'tooltip'         => '00:00-23:00',
 					'validation_type' => 'html',
 				),
 				$this->opts_prefix . 'end_time'    => array(
 					'type'            => 'dropdown',
 					'options'         => $end_hours,
-					'label'           => esc_html__( 'End hour', 'tribe-ext-limit-week-view-time-range' ),
+					'label'           => esc_html__( 'End hour', 'PLUGIN_TEXT_DOMAIN' ),
 					'tooltip'         => '01:00-23:59',
 					'validation_type' => 'html',
 				),
@@ -162,7 +162,7 @@ if (
 		 * Extension initialization and hooks.
 		 */
 		public function init() {
-			load_plugin_textdomain( 'tribe-ext-limit-week-view-time-range', false, basename( dirname( __FILE__ ) ) . '/languages/' );
+			load_plugin_textdomain( 'PLUGIN_TEXT_DOMAIN', false, basename( dirname( __FILE__ ) ) . '/languages/' );
 			add_action( 'admin_init', array( $this, 'add_settings' ) );
 			add_filter( 'tribe_events_week_get_hours', array( $this, 'filter_week_hours' ) );
 		}
