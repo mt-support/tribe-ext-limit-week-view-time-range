@@ -19,6 +19,19 @@ use Tribe__Autoloader;
 use Tribe__Dependency;
 use Tribe__Extension;
 
+/**
+ * Define Constants
+ */
+
+if ( ! defined( __NAMESPACE__ . '\NS' ) ) {
+	define( __NAMESPACE__ . '\NS', __NAMESPACE__ . '\\' );
+}
+
+if ( ! defined( \Tribe\Extensions\Limit_Week_View_Time_Range\NS . 'PLUGIN_TEXT_DOMAIN' ) ) {
+	// `Tribe\Extensions\Example\PLUGIN_TEXT_DOMAIN` is defined
+	define( NS . 'PLUGIN_TEXT_DOMAIN', 'tribe-ext-limit-week-view-time-range' );
+}
+
 // Do not load unless Tribe Common is fully loaded.
 if ( ! class_exists( 'Tribe__Extension' ) ) {
 	return;
