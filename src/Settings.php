@@ -24,7 +24,7 @@ if ( ! class_exists( Settings::class ) ) {
 		 *
 		 * @var string
 		 */
-		private $options_prefix = '';
+		private $options_prefix = 'tribe_ext_lwh_opts_';
 
 		/**
 		 * Settings constructor.

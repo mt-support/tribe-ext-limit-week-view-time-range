@@ -53,8 +53,6 @@ if (
 		 */
 		private $settings;
 
-		protected $opts_prefix = 'tribe_ext_lwh_opts_';
-
 		/**
 		 * Setup the Extension's properties.
 		 *
@@ -65,6 +63,34 @@ if (
 
 			// Set the extension's TEC URL
 			$this->set_url( 'https://theeventscalendar.com/extensions/events-calendar-pro-limit-time-range-in-week-view/' );
+		}
+
+		/**
+		 * Get this plugin's options prefix.
+		 *
+		 * Settings_Helper will append a trailing underscore before each option.
+		 *
+		 * TODO: Remove if not using Settings.
+		 *
+		 * @see \Tribe\Extensions\Example\Settings::set_options_prefix()
+		 *
+		 * @return string
+		 */
+		private function get_options_prefix() {
+			return (string) str_replace( '-', '_', PLUGIN_TEXT_DOMAIN );
+		}
+
+		/**
+		 * Get Settings instance.
+		 *
+		 * @return Settings
+		 */
+		private function get_settings() {
+			if ( empty( $this->settings ) ) {
+				$this->settings = new Settings( $this->get_options_prefix() );
+			}
+
+			return $this->settings;
 		}
 
 		/**
