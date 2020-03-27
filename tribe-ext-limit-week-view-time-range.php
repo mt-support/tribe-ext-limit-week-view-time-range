@@ -186,10 +186,19 @@ if (
 			$end_of_day   = $options['end_time'];
 
 			// Fallback
-			if ( ! is_numeric( $start_of_day ) || $start_of_day < 0 || $start_of_day > 23 ) {
+			if (
+				! is_numeric( $start_of_day )
+				|| $start_of_day < 0
+			    || $start_of_day > 23
+			) {
 				$start_of_day = 0;
 			}
-			if ( ! is_numeric( $end_of_day ) || $end_of_day < 1 || $end_of_day > 23 || $end_of_day < $start_of_day ) {
+			if (
+				! is_numeric( $end_of_day )
+				|| $end_of_day < 1
+				|| $end_of_day > 23
+				|| $end_of_day < $start_of_day
+			) {
 				$end_of_day = 24;
 			}
 
