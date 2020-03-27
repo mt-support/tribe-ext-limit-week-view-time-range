@@ -16,7 +16,6 @@
 namespace Tribe\Extensions\Limit_Week_View_Time_Range;
 
 use Tribe__Autoloader;
-use Tribe__Dependency;
 use Tribe__Extension;
 
 /**
