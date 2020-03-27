@@ -112,9 +112,6 @@ if (
 		 *
 		 * @link https://theeventscalendar.com/knowledgebase/php-version-requirement-changes/ All extensions require PHP 5.6+.
 		 *
-		 * @link https://secure.php.net/manual/en/migration56.new-features.php
-		 * 5.6: Variadic Functions, Argument Unpacking, and Constant Expressions
-		 *
 		 * @return bool
 		 */
 		private function php_version_check() {
