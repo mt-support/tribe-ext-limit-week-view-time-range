@@ -5,7 +5,7 @@ Tags: events, calendar
 Requires at least: 4.5
 Tested up to: 5.3.2
 Requires PHP: 5.6
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,7 +37,7 @@ We're always interested in your feedback and our [premium forums](https://theeve
 
 == Changelog ==
 
-= 1.0.1 2020-02-14 =
+= 1.1.0 TBD =
 
 * Reworked the extension based on the new template for better compatibility
 
