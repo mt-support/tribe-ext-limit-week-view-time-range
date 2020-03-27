@@ -171,13 +171,13 @@ if (
 		}
 
 		/**
-		 * Filters the hours
+		 * Filters the hours.
 		 *
-		 * @param $hours
+		 * @param array $hours
 		 *
-		 * @return mixed
+		 * @return array
 		 */
-		public function filter_week_hours( $hours ) {
+		public function filter_week_hours( array $hours ) {
 
 			$options = $this->get_all_options();
 
