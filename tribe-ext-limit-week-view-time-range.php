@@ -4,7 +4,7 @@
  * Plugin URI:        https://theeventscalendar.com/extensions/events-calendar-pro-limit-time-range-in-week-view
  * GitHub Plugin URI: https://github.com/mt-support/tribe-ext-limit-week-view-time-range
  * Description:       Adds option to WP Admin > Events > Settings > Display to set up the hour range shown on the week view.
- * Version:           1.0.1
+ * Version:           1.1.0
  * Extension Class:   Tribe\Extensions\Limit_Week_View_Time_Range\Main
  * Author:            Modern Tribe, Inc.
  * Author URI:        http://m.tri.be/1971
