@@ -53,6 +53,17 @@ if (
 		private $settings;
 
 		/**
+		 * Set up if it only works with a specific view
+		 * Possible values
+		 * 'V1 legacy'
+		 * 'V2 updated'
+		 *
+		 * @return string
+		 *
+		 */
+		public $view_needed = "V1 legacy";
+
+		/**
 		 * Setup the Extension's properties.
 		 *
 		 * This always executes even if the required plugins are not present.
@@ -100,6 +111,10 @@ if (
 				return;
 			}
 
+			if ( ! $this->v2_views_check() ) {
+				return;
+			}
+
 			$this->class_loader();
 
 			$this->get_settings();
@@ -128,6 +143,45 @@ if (
 					$message .= '</p>';
 
 					tribe_notice( PLUGIN_TEXT_DOMAIN . '-php-version', $message, [ 'type' => 'error' ] );
+				}
+
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
+		 * Check if we have the needed view. Admin notice if we don't and user should see it.
+		 *
+		 * @return bool
+		 *
+		 */
+		private function v2_views_check() {
+			$view_required_version = $this->view_needed;
+
+			$view_breaks_version = $view_required_version == 'V1 legacy' ? 'V2 updated' : 'V1 legacy';
+
+			$show_warning = (
+				$view_required_version == 'V1 legacy' && tribe_events_views_v2_is_enabled()
+				|| $view_required_version == 'V2 updated' && ! tribe_events_views_v2_is_enabled()
+			)
+				? true
+				: false;
+
+			if ( function_exists( 'tribe_events_views_v2_is_enabled' ) ) {
+				if ( is_admin() && current_user_can( 'activate_plugins' ) && $show_warning ) {
+					$message = '<p>';
+					$message .= sprintf(
+						__(
+							'%s requires %s views to work. It will not work with %s views.', PLUGIN_TEXT_DOMAIN
+						),
+						$this->get_name(),
+						$view_required_version,
+						$view_breaks_version,
+					);
+					$message .= '</p>';
+					tribe_notice( PLUGIN_TEXT_DOMAIN . '-views-version', $message, [ 'type' => 'warning' ] );
 				}
 
 				return false;
