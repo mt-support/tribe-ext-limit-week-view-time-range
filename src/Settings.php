@@ -253,14 +253,14 @@ if ( ! class_exists( Settings::class ) ) {
 				'start_time'  => [
 					'type'            => 'dropdown',
 					'options'         => $start_hours,
-					'label'           => esc_html__( 'Start hour', 'PLUGIN_TEXT_DOMAIN' ),
+					'label'           => esc_html__( 'Start hour', PLUGIN_TEXT_DOMAIN ),
 					'tooltip'         => '00:00-23:00',
 					'validation_type' => 'html',
 				],
 				'end_time'    => [
 					'type'            => 'dropdown',
 					'options'         => $end_hours,
-					'label'           => esc_html__( 'End hour', 'PLUGIN_TEXT_DOMAIN' ),
+					'label'           => esc_html__( 'End hour', PLUGIN_TEXT_DOMAIN ),
 					'tooltip'         => '01:00-23:59',
 					'validation_type' => 'html',
 				],
