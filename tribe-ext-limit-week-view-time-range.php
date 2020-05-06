@@ -111,7 +111,7 @@ if (
 				return;
 			}
 
-			if ( ! $this->v2_views_check() ) {
+			if ( ! $this->is_using_compatible_view_version() ) {
 				return;
 			}
 
@@ -157,37 +157,73 @@ if (
 		 * @return bool
 		 *
 		 */
-		private function v2_views_check() {
-			$view_required_version = $this->view_needed;
+		private function is_using_compatible_view_version() {
+			$view_required_version = 1;
 
-			$view_breaks_version = $view_required_version == 'V1 legacy' ? 'V2 updated' : 'V1 legacy';
+			$meets_req = true;
 
-			$show_warning = (
-				$view_required_version == 'V1 legacy' && tribe_events_views_v2_is_enabled()
-				|| $view_required_version == 'V2 updated' && ! tribe_events_views_v2_is_enabled()
-			)
-				? true
-				: false;
-
-			if ( function_exists( 'tribe_events_views_v2_is_enabled' ) ) {
-				if ( is_admin() && current_user_can( 'activate_plugins' ) && $show_warning ) {
-					$message = '<p>';
-					$message .= sprintf(
-						__(
-							'%s requires %s views to work. It will not work with %s views.', PLUGIN_TEXT_DOMAIN
-						),
-						$this->get_name(),
-						$view_required_version,
-						$view_breaks_version,
-					);
-					$message .= '</p>';
-					tribe_notice( PLUGIN_TEXT_DOMAIN . '-views-version', $message, [ 'type' => 'warning' ] );
-				}
-
-				return false;
+			// Is V2 enabled?
+			if (
+				function_exists( 'tribe_events_views_v2_is_enabled' )
+				&& ! empty( tribe_events_views_v2_is_enabled() )
+			) {
+				$is_v2 = true;
+			} else {
+				$is_v2 = false;
 			}
 
-			return true;
+			// V1 compatibility check.
+			if (
+				1 === $view_required_version
+				&& $is_v2
+			) {
+				$meets_req = false;
+			}
+
+			// V2 compatibility check.
+			if (
+				2 === $view_required_version
+				&& ! $is_v2
+			) {
+				$meets_req = false;
+			}
+
+			// Notice, if should be shown.
+			if (
+				! $meets_req
+				&& is_admin()
+				&& current_user_can( 'activate_plugins' )
+			) {
+				if ( 1 === $view_required_version ) {
+					$view_name = _x( 'Legacy Views', 'name of view', 'tribe-ext-extension-template' );
+				} else {
+					$view_name = _x( 'New (V2) Views', 'name of view', 'tribe-ext-extension-template' );
+				}
+
+				$view_name = sprintf(
+					'<a href="%s">%s</a>',
+					esc_url( admin_url( 'edit.php?page=tribe-common&tab=display&post_type=tribe_events' ) ),
+					$view_name
+				);
+
+				// Translators: 1: Extension plugin name, 2: Name of required view, linked to Display tab.
+				$message = sprintf(
+					__(
+						'%1$s requires the "%2$s" so this extension\'s code will not run until this requirement is met. You may want to deactivate this extension or visit its homepage to see if there are any updates available.',
+						'tribe-ext-extension-template'
+					),
+					$this->get_name(),
+					$view_name
+				);
+
+				tribe_notice(
+					'tribe-ext-extension-template-view-mismatch',
+					'<p>' . $message . '</p>',
+					[ 'type' => 'error' ]
+				);
+			}
+
+			return $meets_req;
 		}
 
 		/**
@@ -232,6 +268,9 @@ if (
 
 			$options = $this->get_all_options();
 
+			if ( empty ( $options ) ) {
+				return $hours;
+			}
 			// Set the desired times here, pulls from settings
 			$start_of_day = $options['start_time'];
 			$end_of_day   = $options['end_time'];
