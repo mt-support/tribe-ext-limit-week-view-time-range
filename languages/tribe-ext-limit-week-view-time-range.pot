@@ -2,62 +2,127 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"Project-Id-Version: Events Calendar PRO Extension: Limit Week View Time "
-"Range\n"
-"POT-Creation-Date: 2018-05-18 13:59+0200\n"
-"PO-Revision-Date: 2018-03-01 09:29+0100\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Project-Id-Version: The Events Calendar Pro Extension: Limit Week View Time "
+"Range 2.0.0\n"
+"POT-Creation-Date: 2020-10-17 23:15+0200\n"
+"PO-Revision-Date: 2020-10-17 23:14+0200\n"
+"Last-Translator: Andras Guseo <aguseo@gmail.com>\n"
+"Language-Team: Modern Tribe, Inc. <support@theeventscalendar.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.7\n"
+"X-Generator: Poedit 2.4.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: index.php\n"
+"X-Poedit-WPHeader: tribe-ext-limit-week-view-time-range.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
-#: index.php:77
-msgid "Limit Week View Time Range"
-msgstr ""
-
-#: index.php:81
-msgid ""
-"Set up the time range your week view should show. The start hour should be "
-"lower than the end hour."
-msgstr ""
-
-#: index.php:86
+#: src/Settings.php:259
 msgid "Start hour"
 msgstr ""
 
-#: index.php:94
+#: src/Settings.php:267
 msgid "End hour"
 msgstr ""
 
-#: src/Tribe/Settings_Helper.php:134
+#: src/Settings.php:275
+msgid "Time format"
+msgstr ""
+
+#: src/Settings.php:330
+msgctxt "Settings header"
+msgid "Limit Week View Time Range"
+msgstr ""
+
+#: src/Settings.php:335
+msgctxt "Settings"
+msgid ""
+"Set up the time range your week view should show. The start hour should be "
+"earlier than the end hour."
+msgstr ""
+
+#: src/Settings.php:339
+msgctxt "Settings"
+msgid ""
+"It is recommended to have at least 8-9 hours between the start hour and the "
+"end hour."
+msgstr ""
+
+#: src/Settings.php:354
+msgid "Select a time within the range of 00:00-23:00"
+msgstr ""
+
+#: src/Settings.php:357
+msgid "Events starting before this time will not show up."
+msgstr ""
+
+#: src/Settings.php:369
+msgid "Select a time within the range of 01:00-24:00"
+msgstr ""
+
+#: src/Settings.php:372
+msgid "Events starting after this time will not show up."
+msgstr ""
+
+#: src/Settings.php:375
+msgid ""
+"Events ending after this time might not show up or might cause a small "
+"visual glitch."
+msgstr ""
+
+#: src/Settings.php:387
+msgid "The time format that should be used at the side of the week grid."
+msgstr ""
+
+#: src/Settings.php:390
+msgid "Requires updated (V2) calendar design."
+msgstr ""
+
+#: src/Settings_Helper.php:130
 msgid "Miscellaneous Settings"
 msgstr ""
 
+#: tribe-ext-limit-week-view-time-range.php:193
+#, php-format
+msgid ""
+"%s requires PHP version %s or newer to work. Please contact your website "
+"host and inquire about updating PHP."
+msgstr ""
+
+#: tribe-ext-limit-week-view-time-range.php:240
+msgctxt "name of view"
+msgid "Legacy Views"
+msgstr ""
+
+#: tribe-ext-limit-week-view-time-range.php:242
+msgctxt "name of view"
+msgid "Updated (V2) Views"
+msgstr ""
+
+#: tribe-ext-limit-week-view-time-range.php:250
+#, php-format
+msgid ""
+"%1$s requires the \"%2$s\" so this extension's code will not run until this "
+"requirement is met. You may want to deactivate this extension or visit its "
+"homepage to see if there are any updates available."
+msgstr ""
+
 #. Plugin Name of the plugin/theme
-msgid "The Events Calendar PRO Extension: Limit Time Range in Week View"
+msgid "The Events Calendar Pro Extension: Limit Week View Time Range"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid ""
-"https://theeventscalendar.com/extensions/events-calendar-pro-limit-time-"
-"range-in-week-view"
+"https://theeventscalendar.com/extensions/limit-the-time-range-in-week-view/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid ""
-"Adds option to WP Admin > Events > Settings > Display to set up the hour "
-"range shown on the week view."
+msgid "Limit the hour range shown on the week view."
 msgstr ""
 
 #. Author of the plugin/theme
