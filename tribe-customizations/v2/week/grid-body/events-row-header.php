@@ -14,31 +14,29 @@
  *
  * @version 5.0.0
  */
-
 ?>
+<?php
+$time_format = apply_filters( 'tribe_events_week_sidebar_time_format',
+                              tribe_get_option( 'tribe_ext_limit_week_view_time_range_sidebar_time_format',
+                                                'g a' ) );
+?>
+
 <div class="tribe-events-pro-week-grid__events-row-header" role="rowheader">
 
 	<?php
-	// Get the settings
-	$start       = tribe_get_option( 'tribe_ext_limit_week_view_time_range_start_time', '0' );
-	$finish      = tribe_get_option( 'tribe_ext_limit_week_view_time_range_end_time', '24' );
-	$time_format = apply_filters( 'tribe_events_week_sidebar_time_format',
-	                              tribe_get_option( 'tribe_ext_limit_week_view_time_range_sidebar_time_format',
-	                                                'g a' ) );
-
 	// Set up the new header
-	for ( $i = $start; $i <= $finish; $i++ ) {
+	for ( $i = $ext_options['grid_start_time']; $i <= $ext_options['grid_end_time']; $i++ ) {
 		$classes[] = 'tribe-events-pro-week-grid__events-time-tag';
 		$dt        = $i . ':00';
 		$label     = date( $time_format, mktime( $i, 0, 0, 1, 1, 2020 ) );
 
 		// First header
-		if ( $i == $start ) {
+		if ( $i == $ext_options['grid_start_time'] ) {
 			$classes[] = 'tribe-events-pro-week-grid__events-time-tag--first';
 			$classes[] = 'tribe-common-a11y-visual-hide';
 		}
 		// Last header
-		if ( $i == $finish ) {
+		if ( $i == $ext_options['grid_end_time'] ) {
 			$classes[] = 'tribe-events-pro-week-grid__events-time-tag--last';
 			$classes[] = ' tribe-common-a11y-visual-hide';
 		}

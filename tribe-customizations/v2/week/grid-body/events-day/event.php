@@ -5,7 +5,7 @@
  * This is a template override of the file at:
  * events-calendar-pro/src/views/v2/week/grid-body/events-day/event.php
  *
- * This template override is needed to make the The Events Calendar Pro Extension: Limit Week View Time Range V2
+ * This template override is needed to make the The Events Calendar Pro Extension: Limit Week View Time Range
  * work with the updated (V2) designs.
  *
  * See more documentation about our views templating system.
@@ -47,10 +47,10 @@ $start_time = Dates::time_between( $event->dates->start->format( 'Y-m-d 0:0:0' )
                                    $event->dates->start->format( Dates::DBDATETIMEFORMAT ) );
 
 /**
- * Get the settings
+ * Get the extension settings
  */
-$grid_start_time = tribe_get_option( 'tribe_ext_limit_week_view_time_range_start_time', '0' );
-$grid_end_time   = tribe_get_option( 'tribe_ext_limit_week_view_time_range_end_time', '24' );
+$grid_start_time = $ext_options['grid_start_time'];
+$grid_end_time   = $ext_options['grid_end_time'];
 
 $found_start_time = false;
 
@@ -71,22 +71,26 @@ if ( ! $found_start_time && $grid_start_time > 0 ) {
 	// Set the new class
 	foreach ( $classes as $key => $class ) {
 		$vertical_offset_class = strpos( $class, 'tribe-events-pro-week-grid__event--t-' );
-		//if ( false !== $vertical_offset_class && $vertical_offset_class >= 0 ) {
+
 		if ( preg_match( $pattern, $class ) ) {
 			// Remove the old vertical positioning
 			unset( $classes[ $key ] );
 
-			// Set the new vertical positioning
+			// Grab the vertical offset
 			$event_start_time = str_replace( 'tribe-events-pro-week-grid__event--t-', '', $class );
 			$time_split       = explode( '-', $event_start_time );
 
-			// The starting hour of the event
+			// Set the new starting hour / offset of the event
 			$new_event_start_hour = (int) $time_split[0] - (int) $grid_start_time;
 
-			if ( // Time if off the chart
-				( $new_event_start_hour <= 0 ) || /// Time is in the first 15 minutes of the grid
-				( $grid_start_time === $new_event_start_hour && $time_split[1] <= 15 ) || // Time is before the grid start time
-				( $new_event_start_hour < $grid_start_time ) || // Time + 1 hour is after the grid end time
+			// Hide if...
+			if ( // Time is off the chart (negative start time)
+				( $new_event_start_hour <= 0 ) ||
+				// Time is in the first 15 minutes of the grid
+				( $grid_start_time === $new_event_start_hour && $time_split[1] <= 15 ) ||
+				// Time is before the grid start time
+				( $new_event_start_hour < $grid_start_time ) ||
+				// Time + 1 hour is after the grid end time (for long events at the end of the day
 				( $grid_end_time <= $time_split[0] + (int) $grid_start_time + 1 ) ) {
 				$classes[ $key ] = 'tribe-common-a11y-visual-hide';
 				break;

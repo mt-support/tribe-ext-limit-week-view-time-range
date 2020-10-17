@@ -277,6 +277,12 @@ if ( ! class_exists( Settings::class ) ) {
 					'default'         => 'g a',
 					'validation_type' => 'html',
 				],
+				'show_grid' => [
+					'type'            => 'checkbox_bool',
+					'label'           => esc_html__( 'Show grid', 'tribe-ext-limit-week-view-time-range' ),
+					'tooltip'         => $this->get_show_grid_tooltip(),
+					'validation_type' => 'boolean',
+				],
 			];
 
 			/**
@@ -284,6 +290,7 @@ if ( ! class_exists( Settings::class ) ) {
 			 */
 			if ( ! function_exists( 'tribe_events_views_v2_is_enabled' ) || ( function_exists( 'tribe_events_views_v2_is_enabled' ) && empty( tribe_events_views_v2_is_enabled() ) ) ) {
 				unset( $fields['sidebar_time_format'] );
+				unset( $fields['show_grid'] );
 			}
 
 			$this->settings_helper->add_fields( $this->prefix_settings_field_keys( $fields ),
@@ -385,6 +392,20 @@ if ( ! class_exists( Settings::class ) ) {
 		 */
 		private function get_sidebar_time_format_tooltip() {
 			$result = esc_html__( 'The time format that should be used at the side of the week grid.',
+			                      'tribe-ext-limit-week-view-time-range' );
+			$result .= '<br/>';
+			$result .= esc_html__( 'Requires updated (V2) calendar design.', 'tribe-ext-limit-week-view-time-range' );
+
+			return $result;
+		}
+
+		/**
+		 * Tooltip for showing the grid
+		 *
+		 * @return string
+		 */
+		private function get_show_grid_tooltip() {
+			$result = esc_html__( 'Enabling this option will show a grid (light grey dashed horizontal lines at every hour) on week view.',
 			                      'tribe-ext-limit-week-view-time-range' );
 			$result .= '<br/>';
 			$result .= esc_html__( 'Requires updated (V2) calendar design.', 'tribe-ext-limit-week-view-time-range' );
