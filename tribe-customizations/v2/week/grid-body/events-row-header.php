@@ -39,7 +39,9 @@ $time_format = apply_filters( 'tribe_events_week_sidebar_time_format',
 			$classes[] = 'tribe-events-pro-week-grid__events-time-tag--last';
 			$classes[] = ' tribe-common-a11y-visual-hide';
 		}
+
 		echo '<time class="' . implode( ' ', $classes ) . '" datetime="' . $dt . '">' . $label . '</time>';
+
 		unset( $classes );
 	}
 	?>
