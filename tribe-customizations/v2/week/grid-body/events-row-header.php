@@ -14,8 +14,6 @@
  *
  * @version 5.0.0
  */
-?>
-<?php
 $time_format = apply_filters( 'tribe_events_week_sidebar_time_format',
                               tribe_get_option( 'tribe_ext_limit_week_view_time_range_sidebar_time_format',
                                                 'g a' ) );
