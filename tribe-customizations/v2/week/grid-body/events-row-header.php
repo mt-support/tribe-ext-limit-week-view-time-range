@@ -33,6 +33,7 @@ $time_format = apply_filters( 'tribe_events_week_sidebar_time_format',
 			$classes[] = 'tribe-events-pro-week-grid__events-time-tag--first';
 			$classes[] = 'tribe-common-a11y-visual-hide';
 		}
+
 		// Last header
 		if ( $i == $ext_options['grid_end_time'] ) {
 			$classes[] = 'tribe-events-pro-week-grid__events-time-tag--last';
