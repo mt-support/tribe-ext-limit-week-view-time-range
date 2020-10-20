@@ -306,6 +306,7 @@ if ( ! class_exists( Settings::class ) ) {
 				'g A'   => '3 PM',
 				'G'     => '15',
 				'G:i'   => '15:00',
+				'Hi'    => '1500',
 			];
 
 			return $time_format;
