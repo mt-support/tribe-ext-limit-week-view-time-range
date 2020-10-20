@@ -18,6 +18,8 @@
  *                                 `[ <Y-m-d> => [ 'events' => [ ...$multiday_events], 'more_events' => <int> ] ]`.
  * @var bool  $has_multiday_events Boolean whether the week has multiday events or not.
  * @var array $events              An array of each day non multi-day events, if any, in the shape `[ <Y-m-d> => [ ...$events ] ]`.
+ * @var array $ext_options         An array of the extension settings.
+ * @var int       $count       int to count which day of the week we are on.
  */
 
 /**
