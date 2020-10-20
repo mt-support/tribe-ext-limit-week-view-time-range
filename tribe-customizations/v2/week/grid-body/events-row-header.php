@@ -16,6 +16,14 @@
  *
  * @var array $ext_options An array of the extension settings.
  */
+
+/**
+ * Filters the time format in the week view row header.
+ *
+ * @since 2.0.0
+ *
+ * @param string Time format.
+ */
 $time_format = apply_filters(
 	'tribe_events_week_sidebar_time_format',
 	tribe_get_option(
