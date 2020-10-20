@@ -32,7 +32,7 @@ $time_format = apply_filters(
 	for ( $i = $ext_options['grid_start_time']; $i <= $ext_options['grid_end_time']; $i ++ ) {
 		$classes[] = 'tribe-events-pro-week-grid__events-time-tag';
 		$dt        = $i . ':00';
-		$label     = date( $time_format, mktime( $i, 0, 0, 1, 1, 2020 ) );
+		$label     = date( $time_format, strtotime( $dt ) );
 
 		// First header
 		if ( $i == $ext_options['grid_start_time'] ) {

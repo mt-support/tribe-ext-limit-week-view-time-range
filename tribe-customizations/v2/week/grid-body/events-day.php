@@ -25,15 +25,15 @@
 <div class="tribe-events-pro-week-grid__events-day" role="gridcell">
 	<?php
 	/**
-	 * This will show a grid on the week view. Horizontal dashed lines across the 7 days at every hour.
-	 * Kind of the extension of the hour tick mark on the left side.
+	 * This will show a grid on the week view. Horizontal dashed lines across the 7 days at every hour, except the last hour.
+	 * The grid is kind of the extension of the hour tick mark on the left side.
 	 * 'grid_start_time' and 'grid_end_time' are integers used in the CSS classes, not real date or time.
 	 */
 	if (
 		$count == 0
 		&& $ext_options['show_grid']
 	) {
-		for ( $i = 0; $i <= $ext_options['grid_end_time'] - $ext_options['grid_start_time']; $i ++ ) {
+		for ( $i = 0; $i < $ext_options['grid_end_time'] - $ext_options['grid_start_time'] - 1; $i ++ ) {
 			echo '<div class="tribe-events-pro-week-grid__events-day-gridlines" style="top: calc(' . $i . ' * 48px);"></div>';
 		}
 	}
