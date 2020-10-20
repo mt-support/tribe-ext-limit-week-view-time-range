@@ -2,9 +2,9 @@
 Contributors: ModernTribe
 Donate link: http://m.tri.be/29
 Tags: events, calendar
-Requires at least: 5.0
+Requires at least: 4.9.14
 Tested up to: 5.5.1
-Requires PHP: 7.0
+Requires PHP: 5.6
 Stable tag: 2.0.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -39,6 +39,7 @@ We're always interested in your feedback and our [premium forums](https://theeve
 
 * Extension now works with both Legacy (V1) and updated (V2) calendar designs
 * Added the option to choose the time format shown on the side of the week view grid for updated calendar designs
+* Added the option to show a grid / horizontal lines across the days when using updated (V2) calendar designs
 
 = 1.0.0 2018-05-18 =
 
