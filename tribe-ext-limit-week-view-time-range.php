@@ -29,7 +29,10 @@ use Tribe__Autoloader;
 use Tribe__Extension;
 
 // Do not load unless Tribe Common is fully loaded and our class does not yet exist.
-if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
+if (
+	class_exists( 'Tribe__Extension' )
+	&& ! class_exists( Main::class )
+) {
 	/**
 	 * Extension main class, class begins loading on init() function.
 	 */
@@ -59,9 +62,9 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 		 *
 		 * Settings_Helper will append a trailing underscore before each option.
 		 *
-		 * @return string
 		 * @see \Tribe\Extensions\Limit_Week_View_Time_Range\Settings::set_options_prefix()
 		 *
+		 * @return string
 		 */
 		private function get_options_prefix() {
 			return (string) str_replace( '-', '_', 'tribe-ext-limit-week-view-time-range' );
@@ -85,17 +88,11 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 		 */
 		public function init() {
 			// Load plugin textdomain
-			load_plugin_textdomain( 'tribe-ext-limit-week-view-time-range',
-			                        false,
-			                        basename( dirname( __FILE__ ) ) . '/languages/' );
+			load_plugin_textdomain( 'tribe-ext-limit-week-view-time-range', false, basename( dirname( __FILE__ ) ) . '/languages/' );
 
 			if ( ! $this->php_version_check() ) {
 				return;
 			}
-
-			/*if ( ! $this->is_using_compatible_view_version() ) {
-				return;
-			}*/
 
 			$this->class_loader();
 
@@ -109,7 +106,7 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 		/**
 		 * Template override in plugin folder. Needed for V2.
 		 *
-		 * @param $folders
+		 * @param                  $folders
 		 * @param \Tribe__Template $template
 		 *
 		 * @return mixed
@@ -118,28 +115,27 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 			// Which file namespace your plugin will use.
 			$plugin_name = 'tribe-ext-limit-week-view-time-range';
 
-			// Which order we should load your plugin files at.
+			// Which order we should load your plugin files at. Plugin in which the file was loaded from = 20. Events Pro = 25. Tickets = 17.
 			$priority = 5;
-			// Plugin in which the file was loaded from = 20
-			// Events Pro = 25
-			// Tickets = 17
 
 			// Which folder in your plugin the customizations will be loaded from.
 			$custom_folder[] = 'tribe-customizations';
 
 			// Builds the correct file path to look for.
-			$plugin_path = array_merge( (array) trailingslashit( plugin_dir_path( __FILE__ ) ),
-			                            (array) $custom_folder,
-			                            array_diff( $template->get_template_folder(), [ 'src', 'views' ] ) );
+			$plugin_path = array_merge(
+				(array) trailingslashit( plugin_dir_path( __FILE__ ) ),
+				(array) $custom_folder,
+				array_diff( $template->get_template_folder(), [ 'src', 'views' ] )
+			);
 
 			/*
 			 * Custom loading location for overwriting file loading.
 			 */
 			$folders[ $plugin_name ] = [
-				'id' => $plugin_name,
+				'id'        => $plugin_name,
 				'namespace' => $plugin_name, // Only set this if you want to overwrite theme namespacing
-				'priority' => $priority,
-				'path' => $plugin_path,
+				'priority'  => $priority,
+				'path'      => $plugin_path,
 			];
 
 			return $folders;
@@ -161,15 +157,28 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 			$end_of_day   = $options['end_time'];
 
 			// Fallback
-			if ( ! is_numeric( $start_of_day ) || $start_of_day < 0 || $start_of_day > 23 ) {
+			if (
+				! is_numeric( $start_of_day )
+				|| $start_of_day < 0
+				|| $start_of_day > 23
+			) {
 				$start_of_day = 0;
 			}
-			if ( ! is_numeric( $end_of_day ) || $end_of_day < 1 || $end_of_day > 23 || $end_of_day < $start_of_day ) {
+
+			if (
+				! is_numeric( $end_of_day )
+				|| $end_of_day < 1
+				|| $end_of_day > 23
+				|| $end_of_day < $start_of_day
+			) {
 				$end_of_day = 24;
 			}
 
 			foreach ( $hours as $hour => $formatted_hour ) {
-				if ( $hour < $start_of_day || $hour >= $end_of_day ) {
+				if (
+					$hour < $start_of_day
+					|| $hour >= $end_of_day
+				) {
 					unset( $hours[ $hour ] );
 				}
 			}
@@ -185,15 +194,22 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 		 * @return bool
 		 */
 		private function php_version_check() {
-			$php_required_version = '7.0';
+			$php_required_version = '5.6';
 
 			if ( version_compare( PHP_VERSION, $php_required_version, '<' ) ) {
-				if ( is_admin() && current_user_can( 'activate_plugins' ) ) {
+				if (
+					is_admin()
+					&& current_user_can( 'activate_plugins' )
+				) {
 					$message = '<p>';
-					$message .= sprintf( __( '%s requires PHP version %s or newer to work. Please contact your website host and inquire about updating PHP.',
-					                         'tribe-ext-limit-week-view-time-range' ),
-					                     $this->get_name(),
-					                     $php_required_version );
+					$message .= sprintf(
+						__(
+							'%s requires PHP version %s or newer to work. Please contact your website host and inquire about updating PHP.',
+							'tribe-ext-limit-week-view-time-range'
+						),
+						$this->get_name(),
+						$php_required_version
+					);
 					$message .= sprintf( ' <a href="%1$s">%1$s</a>', 'https://wordpress.org/about/requirements/' );
 					$message .= '</p>';
 					tribe_notice( 'tribe-ext-limit-week-view-time-range-php-version', $message, [ 'type' => 'error' ] );
@@ -206,61 +222,6 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 		}
 
 		/**
-		 * Check if we have the required TEC view. Admin notice if we don't and user should see it.
-		 *
-		 * @return bool
-		 * @example
-		 *
-		 */
-		private function is_using_compatible_view_version() {
-			$view_required_version = 2;
-
-			$meets_req = true;
-
-			// Is V2 enabled?
-			if ( function_exists( 'tribe_events_views_v2_is_enabled' ) && ! empty( tribe_events_views_v2_is_enabled() ) ) {
-				$is_v2 = true;
-			} else {
-				$is_v2 = false;
-			}
-
-			// V1 compatibility check.
-			if ( 1 === $view_required_version && $is_v2 ) {
-				$meets_req = false;
-			}
-
-			// V2 compatibility check.
-			if ( 2 === $view_required_version && ! $is_v2 ) {
-				$meets_req = false;
-			}
-
-			// Notice, if should be shown.
-			if ( ! $meets_req && is_admin() && current_user_can( 'activate_plugins' ) ) {
-				if ( 1 === $view_required_version ) {
-					$view_name = _x( 'Legacy Views', 'name of view', 'tribe-ext-limit-week-view-time-range' );
-				} else {
-					$view_name = _x( 'Updated (V2) Views', 'name of view', 'tribe-ext-limit-week-view-time-range' );
-				}
-
-				$view_name = sprintf( '<a href="%s">%s</a>',
-				                      esc_url( admin_url( 'edit.php?page=tribe-common&tab=display&post_type=tribe_events' ) ),
-				                      $view_name );
-
-				// Translators: 1: Extension plugin name, 2: Name of required view, linked to Display tab.
-				$message = sprintf( __( '%1$s requires the "%2$s" so this extension\'s code will not run until this requirement is met. You may want to deactivate this extension or visit its homepage to see if there are any updates available.',
-				                        'tribe-ext-limit-week-view-time-range' ),
-				                    $this->get_name(),
-				                    $view_name );
-
-				tribe_notice( 'tribe-ext-limit-week-view-time-range-view-mismatch',
-				              '<p>' . $message . '</p>',
-				              [ 'type' => 'error' ] );
-			}
-
-			return $meets_req;
-		}
-
-		/**
 		 * Use Tribe Autoloader for all class files within this namespace in the 'src' directory.
 		 *
 		 * @return Tribe__Autoloader
@@ -269,8 +230,10 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 			if ( empty( $this->class_loader ) ) {
 				$this->class_loader = new Tribe__Autoloader;
 				$this->class_loader->set_dir_separator( '\\' );
-				$this->class_loader->register_prefix( __NAMESPACE__ . '\\',
-				                                      __DIR__ . DIRECTORY_SEPARATOR . 'src' );
+				$this->class_loader->register_prefix(
+					__NAMESPACE__ . '\\',
+					__DIR__ . DIRECTORY_SEPARATOR . 'src'
+				);
 			}
 
 			$this->class_loader->register_autoloader();
@@ -292,7 +255,7 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 		/**
 		 * Get a specific extension option.
 		 *
-		 * @param $option
+		 * @param        $option
 		 * @param string $default
 		 *
 		 * @return array
@@ -307,8 +270,10 @@ if ( class_exists( 'Tribe__Extension' ) && ! class_exists( Main::class ) ) {
 		 * Enqueuing stylesheet
 		 */
 		public function enquque_styles() {
-			wp_enqueue_style( 'tribe-ext-limit-week-view-time-range',
-			                  plugin_dir_url( __FILE__ ) . 'src/resources/style.css' );
+			wp_enqueue_style(
+				'tribe-ext-limit-week-view-time-range',
+				plugin_dir_url( __FILE__ ) . 'src/resources/style.css'
+			);
 		}
 
 	} // end class
