@@ -10,20 +10,26 @@
  *
  * See more documentation about our views templating system.
  *
- * @link http://m.tri.be/1aiy
+ * @link    http://m.tri.be/1aiy
  *
  * @version 5.0.0
+ *
+ * @var array $ext_options An array of the extension settings.
  */
-$time_format = apply_filters( 'tribe_events_week_sidebar_time_format',
-                              tribe_get_option( 'tribe_ext_limit_week_view_time_range_sidebar_time_format',
-                                                'g a' ) );
+$time_format = apply_filters(
+	'tribe_events_week_sidebar_time_format',
+	tribe_get_option(
+		'tribe_ext_limit_week_view_time_range_sidebar_time_format',
+		'g a'
+	)
+);
 ?>
 
 <div class="tribe-events-pro-week-grid__events-row-header" role="rowheader">
 
 	<?php
 	// Set up the new header
-	for ( $i = $ext_options['grid_start_time']; $i <= $ext_options['grid_end_time']; $i++ ) {
+	for ( $i = $ext_options['grid_start_time']; $i <= $ext_options['grid_end_time']; $i ++ ) {
 		$classes[] = 'tribe-events-pro-week-grid__events-time-tag';
 		$dt        = $i . ':00';
 		$label     = date( $time_format, mktime( $i, 0, 0, 1, 1, 2020 ) );
