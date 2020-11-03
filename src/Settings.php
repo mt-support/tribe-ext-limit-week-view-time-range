@@ -335,9 +335,11 @@ if ( ! class_exists( Settings::class ) ) {
 		 * @return string
 		 */
 		private function get_setting_intro_text() {
-			$result = '<h3>' . esc_html_x( 'Limit Week View Time Range',
-			                               'Settings header',
-			                               'tribe-ext-limit-week-view-time-range' ) . '</h3>';
+			$result = '<h3>' . esc_html_x(
+					'Limit Week View Time Range',
+					'Settings header',
+					'tribe-ext-limit-week-view-time-range'
+				) . '</h3>';
 			$result .= '<div style="margin-left: 20px;">';
 			$result .= '<p>';
 			$result .= esc_html_x( 'Set up the time range your week view should show. The start hour should be earlier than the end hour.',
