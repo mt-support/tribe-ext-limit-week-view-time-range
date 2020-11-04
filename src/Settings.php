@@ -43,11 +43,11 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Allow access to set the Settings Helper property.
 		 *
+		 * @see get_settings_helper()
+		 *
 		 * @param Settings_Helper $helper
 		 *
 		 * @return Settings_Helper
-		 * @see get_settings_helper()
-		 *
 		 */
 		public function set_settings_helper( Settings_Helper $helper ) {
 			$this->settings_helper = $helper;
@@ -70,9 +70,9 @@ if ( ! class_exists( Settings::class ) ) {
 		 * Recommended: the plugin text domain, with hyphens converted to underscores.
 		 * Is forced to end with a single underscore. All double-underscores are converted to single.
 		 *
-		 * @param string $options_prefix
-		 *
 		 * @see get_options_prefix()
+		 *
+		 * @param string $options_prefix
 		 *
 		 */
 		private function set_options_prefix( $options_prefix ) {
@@ -84,9 +84,9 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Get this extension's options prefix.
 		 *
-		 * @return string
 		 * @see set_options_prefix()
 		 *
+		 * @return string
 		 */
 		public function get_options_prefix() {
 			return $this->options_prefix;
@@ -97,13 +97,13 @@ if ( ! class_exists( Settings::class ) ) {
 		 *
 		 * This automatically prepends this extension's option prefix so you can just do `$this->get_option( 'a_setting' )`.
 		 *
-		 * @param string $key
+		 * @see tribe_get_option()
 		 *
 		 * @param string $default
 		 *
-		 * @return mixed
-		 * @see tribe_get_option()
+		 * @param string $key
 		 *
+		 * @return mixed
 		 */
 		public function get_option( $key = '', $default = '' ) {
 			$key = $this->sanitize_option_key( $key );
@@ -277,7 +277,7 @@ if ( ! class_exists( Settings::class ) ) {
 					'default'         => 'g a',
 					'validation_type' => 'html',
 				],
-				'show_grid' => [
+				'show_grid'           => [
 					'type'            => 'checkbox_bool',
 					'label'           => esc_html__( 'Show grid', 'tribe-ext-limit-week-view-time-range' ),
 					'tooltip'         => $this->get_show_grid_tooltip(),
@@ -293,10 +293,12 @@ if ( ! class_exists( Settings::class ) ) {
 				unset( $fields['show_grid'] );
 			}
 
-			$this->settings_helper->add_fields( $this->prefix_settings_field_keys( $fields ),
-			                                    'display',
-			                                    'enable_month_view_cache',
-			                                    false );
+			$this->settings_helper->add_fields(
+				$this->prefix_settings_field_keys( $fields ),
+				'display',
+				'enable_month_view_cache',
+				false
+			);
 		}
 
 		private function get_sidebar_time_format() {
@@ -320,11 +322,15 @@ if ( ! class_exists( Settings::class ) ) {
 		 * @return array
 		 */
 		private function prefix_settings_field_keys( array $fields ) {
-			$prefixed_fields = array_combine( array_map( function ( $key ) {
-				return $this->get_options_prefix() . $key;
-			},
-				array_keys( $fields ) ),
-			                                  $fields );
+			$prefixed_fields = array_combine(
+				array_map(
+					function ( $key ) {
+						return $this->get_options_prefix() . $key;
+					},
+					array_keys( $fields )
+				),
+				$fields
+			);
 
 			return (array) $prefixed_fields;
 		}
@@ -342,13 +348,17 @@ if ( ! class_exists( Settings::class ) ) {
 				) . '</h3>';
 			$result .= '<div style="margin-left: 20px;">';
 			$result .= '<p>';
-			$result .= esc_html_x( 'Set up the time range your week view should show. The start hour should be earlier than the end hour.',
-			                       'Settings',
-			                       'tribe-ext-limit-week-view-time-range' );
+			$result .= esc_html_x(
+				'Set up the time range your week view should show. The start hour should be earlier than the end hour.',
+				'Settings',
+				'tribe-ext-limit-week-view-time-range'
+			);
 			$result .= '<br/>';
-			$result .= esc_html_x( 'It is recommended to have at least 8-9 hours between the start hour and the end hour.',
-			                       'Settings',
-			                       'tribe-ext-limit-week-view-time-range' );
+			$result .= esc_html_x(
+				'It is recommended to have at least 8-9 hours between the start hour and the end hour.',
+				'Settings',
+				'tribe-ext-limit-week-view-time-range'
+			);
 			$result .= '</p>';
 			$result .= '</div>';
 
@@ -361,11 +371,15 @@ if ( ! class_exists( Settings::class ) ) {
 		 * @return string
 		 */
 		private function get_start_time_tooltip() {
-			$result = esc_html__( 'Select a time within the range of 00:00-23:00',
-			                      'tribe-ext-limit-week-view-time-range' );
+			$result = esc_html__(
+				'Select a time within the range of 00:00-23:00',
+				'tribe-ext-limit-week-view-time-range'
+			);
 			$result .= '<br/>';
-			$result .= esc_html__( 'Events starting before this time will not show up.',
-			                       'tribe-ext-limit-week-view-time-range' );
+			$result .= esc_html__(
+				'Events starting before this time will not show up.',
+				'tribe-ext-limit-week-view-time-range'
+			);
 
 			return $result;
 		}
@@ -376,14 +390,20 @@ if ( ! class_exists( Settings::class ) ) {
 		 * @return string
 		 */
 		private function get_end_time_tooltip() {
-			$result = esc_html__( 'Select a time within the range of 01:00-24:00',
-			                      'tribe-ext-limit-week-view-time-range' );
+			$result = esc_html__(
+				'Select a time within the range of 01:00-24:00',
+				'tribe-ext-limit-week-view-time-range'
+			);
 			$result .= '<br/>';
-			$result .= esc_html__( 'Events starting after this time will not show up.',
-			                       'tribe-ext-limit-week-view-time-range' );
+			$result .= esc_html__(
+				'Events starting after this time will not show up.',
+				'tribe-ext-limit-week-view-time-range'
+			);
 			$result .= '<br/>';
-			$result .= esc_html__( 'Events ending after this time might not show up or might cause a small visual glitch.',
-			                       'tribe-ext-limit-week-view-time-range' );
+			$result .= esc_html__(
+				'Events ending after this time might not show up or might cause a small visual glitch.',
+				'tribe-ext-limit-week-view-time-range'
+			);
 
 			return $result;
 		}
@@ -394,8 +414,10 @@ if ( ! class_exists( Settings::class ) ) {
 		 * @return string
 		 */
 		private function get_sidebar_time_format_tooltip() {
-			$result = esc_html__( 'The time format that should be used at the side of the week grid.',
-			                      'tribe-ext-limit-week-view-time-range' );
+			$result = esc_html__(
+				'The time format that should be used at the side of the week grid.',
+				'tribe-ext-limit-week-view-time-range'
+			);
 			$result .= '<br/>';
 			$result .= esc_html__( 'Requires updated (V2) calendar design.', 'tribe-ext-limit-week-view-time-range' );
 
@@ -408,8 +430,10 @@ if ( ! class_exists( Settings::class ) ) {
 		 * @return string
 		 */
 		private function get_show_grid_tooltip() {
-			$result = esc_html__( 'Enabling this option will show a grid (light grey dashed horizontal lines at every hour) on week view.',
-			                      'tribe-ext-limit-week-view-time-range' );
+			$result = esc_html__(
+				'Enabling this option will show a grid (light grey dashed horizontal lines at every hour) on week view.',
+				'tribe-ext-limit-week-view-time-range'
+			);
 			$result .= '<br/>';
 			$result .= esc_html__( 'Requires updated (V2) calendar design.', 'tribe-ext-limit-week-view-time-range' );
 
