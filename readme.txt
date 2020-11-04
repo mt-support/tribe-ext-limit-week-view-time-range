@@ -37,9 +37,9 @@ We're always interested in your feedback and our [premium forums](https://theeve
 
 = 2.0.0 2020-10-26 =
 
-* Extension now works with both Legacy (V1) and updated (V2) calendar designs
-* Added the option to choose the time format shown on the side of the week view grid for updated calendar designs
-* Added the option to show a grid / horizontal lines across the days when using updated (V2) calendar designs
+* Feature - Extension now works with both legacy (V1) and updated (V2) calendar designs.
+* Feature - Added the option to choose the time format shown on the side of the week view grid for updated calendar designs.
+* Feature - Added the option to show a grid / horizontal lines across the days when using updated (V2) calendar designs.
 
 = 1.0.0 2018-05-18 =
 
