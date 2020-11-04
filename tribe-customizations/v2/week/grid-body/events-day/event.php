@@ -54,7 +54,7 @@ $grid_end_time   = $ext_options['grid_end_time'];
 /**
  * int containing if we have found the start time of an event based on the CSS class.
  */
-$found_start_time = false;
+$found_start_time_class = false;
 
 /**
  * The pattern of the CSS class of the vertical offset.
@@ -65,13 +65,13 @@ foreach ( $classes as $key => $class ) {
 	// Check if event has the vertical offset class.
 	// An event starting at 12am doesn't have a vertical offset class.
 	if ( preg_match( $pattern, $class ) ) {
-		$found_start_time = true;
+		$found_start_time_class = true;
 	}
 }
 
 // Hide the ones that would be in the 12 to 1 row. (They don't have the class.)
 if (
-	! $found_start_time
+	! $found_start_time_class
 	&& $grid_start_time > 0
 ) {
 	$classes[] = 'tribe-common-a11y-visual-hide';
@@ -93,17 +93,17 @@ if (
 
 			// Hide if...
 			if (
-				// Time is off the chart (negative start time)
+				// ... time is off the chart (negative start time).
 				$new_event_start_hour <= 0
-				// Time is in the first 15 minutes of the grid
+				// ... time is in the first 15 minutes of the grid.
 				|| (
 					$grid_start_time === $new_event_start_hour
 					&& $time_split[1] <= 15
 				)
-				// Time is before the grid start time
-				|| $new_event_start_hour < $grid_start_time
-				// Time + 1 hour is after the grid end time (for long events at the end of the day)
-				|| $grid_end_time <= $time_split[0] + (int) $grid_start_time + 1
+				// ... original time is before the grid start time.
+				|| $time_split[0] < $grid_start_time
+				// ... time + 1 hour is after the grid end time (for long events at the end of the day).
+				|| $grid_end_time <= $new_event_start_hour + (int) $grid_start_time + 1
 			) {
 				$classes[ $key ] = 'tribe-common-a11y-visual-hide';
 				break;
