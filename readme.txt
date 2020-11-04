@@ -35,7 +35,7 @@ We're always interested in your feedback and our [premium forums](https://theeve
 
 == Changelog ==
 
-= 2.0.0 2020-10-26 =
+= 2.0.0 2020-11-06 =
 
 * Feature - Extension now works with both legacy (V1) and updated (V2) calendar designs.
 * Feature - Added the option to choose the time format shown on the side of the week view grid for updated calendar designs.
