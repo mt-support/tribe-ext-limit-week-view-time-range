@@ -27,6 +27,7 @@ namespace Tribe\Extensions\Limit_Week_View_Time_Range;
 
 use Tribe__Autoloader;
 use Tribe__Extension;
+use Tribe__Template;
 
 // Do not load unless Tribe Common is fully loaded and our class does not yet exist.
 if (
@@ -107,11 +108,11 @@ if (
 		 * Template override in plugin folder. Needed for V2.
 		 *
 		 * @param                  $folders
-		 * @param \Tribe__Template $template
+		 * @param Tribe__Template $template
 		 *
 		 * @return mixed
 		 */
-		function alternative_week_view_template_locations( $folders, \Tribe__Template $template ) {
+		function alternative_week_view_template_locations( $folders, Tribe__Template $template ) {
 			// Which file namespace your plugin will use.
 			$plugin_name = 'tribe-ext-limit-week-view-time-range';
 
