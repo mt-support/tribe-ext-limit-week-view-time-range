@@ -38,7 +38,6 @@ if ( ! class_exists( Settings_Helper::class ) ) {
 		 */
 		private $remove_fields = [];
 
-
 		/**
 		 * Setup the helper
 		 *
@@ -47,7 +46,6 @@ if ( ! class_exists( Settings_Helper::class ) ) {
 		public function __construct( $priority = 100 ) {
 			add_filter( 'tribe_settings_tab_fields', [ $this, 'filter_options' ], $priority, 2 );
 		}
-
 
 		/**
 		 * Add a field to a Tribe Settings tab
@@ -97,7 +95,6 @@ if ( ! class_exists( Settings_Helper::class ) ) {
 
 		}
 
-
 		/**
 		 * Remove a field from one of the tabs in WP Admin > Events > Settings
 		 *
@@ -107,7 +104,6 @@ if ( ! class_exists( Settings_Helper::class ) ) {
 		public function remove_field( $field_key, $setting_tab ) {
 			$this->remove_fields[ $setting_tab ][] = $field_key;
 		}
-
 
 		/**
 		 * Attached to 'tribe_settings_tab_fields' to add/remove this class' fields on Tribe Settings pages.
