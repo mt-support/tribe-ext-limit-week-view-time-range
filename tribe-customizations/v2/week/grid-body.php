@@ -25,9 +25,27 @@
 /**
  * Get the settings
  */
-$ext_options['grid_start_time'] = tribe_get_option( 'tribe_ext_limit_week_view_time_range_start_time', '0' );
-$ext_options['grid_end_time']   = tribe_get_option( 'tribe_ext_limit_week_view_time_range_end_time', '24' );
+$ext_options['grid_start_time'] = tribe_get_option( 'tribe_ext_limit_week_view_time_range_start_time', 0 );
+$ext_options['grid_end_time']   = tribe_get_option( 'tribe_ext_limit_week_view_time_range_end_time', 24 );
 $ext_options['show_grid']       = tribe_get_option( 'tribe_ext_limit_week_view_time_range_show_grid', false );
+
+/**
+ * Making sure that the values are within the accepted range and are integer,
+ * otherwise set the default value.
+ */
+if (
+	$ext_options['grid_start_time'] < 0
+	|| $ext_options['grid_start_time'] > 23
+) {
+	$ext_options['grid_start_time'] = 0;
+}
+
+if (
+	$ext_options['grid_end_time'] < 1
+	|| $ext_options['grid_end_time'] > 24
+) {
+	$ext_options['grid_end_time'] = 24;
+}
 ?>
 
 <div class="tribe-events-pro-week-grid__body" role="rowgroup">
