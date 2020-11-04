@@ -33,7 +33,7 @@
 		$count == 0
 		&& $ext_options['show_grid']
 	) {
-		for ( $i = 0; $i < $ext_options['grid_end_time'] - $ext_options['grid_start_time'] - 1; $i ++ ) {
+		for ( $i = 0; $i < (int) $ext_options['grid_end_time'] - (int) $ext_options['grid_start_time'] - 1; $i ++ ) {
 			echo '<div class="tribe-events-pro-week-grid__events-day-gridlines" style="top: calc(' . $i . ' * 48px);"></div>';
 		}
 	}

@@ -37,7 +37,7 @@ $time_format = apply_filters(
 
 	<?php
 	// Set up the new header
-	for ( $i = $ext_options['grid_start_time']; $i <= $ext_options['grid_end_time']; $i ++ ) {
+	for ( $i = (int) $ext_options['grid_start_time']; $i <= (int) $ext_options['grid_end_time']; $i ++ ) {
 		$classes[] = 'tribe-events-pro-week-grid__events-time-tag';
 		$dt        = $i . ':00';
 		$label     = date( $time_format, strtotime( $dt ) );
