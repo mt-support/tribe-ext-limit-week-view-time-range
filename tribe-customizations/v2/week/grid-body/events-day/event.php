@@ -48,8 +48,8 @@ $start_time = Dates::time_between( $event->dates->start->format( 'Y-m-d 0:0:0' )
 /**
  * Get the extension settings
  */
-$grid_start_time = $ext_options['grid_start_time'];
-$grid_end_time   = $ext_options['grid_end_time'];
+$grid_start_time = (int) $ext_options['grid_start_time'];
+$grid_end_time   = (int) $ext_options['grid_end_time'];
 
 /**
  * int containing if we have found the start time of an event based on the CSS class.
@@ -89,7 +89,7 @@ if (
 			$time_split       = explode( '-', $event_start_time );
 
 			// Set the new starting hour / offset of the event
-			$new_event_start_hour = (int) $time_split[0] - (int) $grid_start_time;
+			$new_event_start_hour = (int) $time_split[0] - $grid_start_time;
 
 			// Hide if...
 			if (
@@ -98,12 +98,12 @@ if (
 				// ... time is in the first 15 minutes of the grid.
 				|| (
 					$grid_start_time === $new_event_start_hour
-					&& $time_split[1] <= 15
+					&& (int) $time_split[1] <= 15
 				)
 				// ... original time is before the grid start time.
-				|| $time_split[0] < $grid_start_time
+				|| (int) $time_split[0] < $grid_start_time
 				// ... time + 1 hour is after the grid end time (for long events at the end of the day).
-				|| $grid_end_time <= $new_event_start_hour + (int) $grid_start_time + 1
+				|| $grid_end_time <= $new_event_start_hour + $grid_start_time + 1
 			) {
 				$classes[ $key ] = 'tribe-common-a11y-visual-hide';
 				break;
