@@ -143,8 +143,7 @@ if (
 		}
 
 		/**
-		 * Filters the hours of week view.
-		 * Needed for V1.
+		 * Filters the hours of legacy (V1) week view.
 		 *
 		 * @param array $hours
 		 *
@@ -271,10 +270,12 @@ if (
 		 * Enqueuing stylesheet
 		 */
 		public function enquque_styles() {
-			wp_enqueue_style(
-				'tribe-ext-limit-week-view-time-range',
-				plugin_dir_url( __FILE__ ) . 'src/resources/style.css'
-			);
+			if ( function_exists( 'tribe_events_views_v2_is_enabled' ) && ! empty( tribe_events_views_v2_is_enabled() ) ) {
+				wp_enqueue_style(
+					'tribe-ext-limit-week-view-time-range',
+					plugin_dir_url( __FILE__ ) . 'src/resources/style.css'
+				);
+			}
 		}
 
 	} // end class
