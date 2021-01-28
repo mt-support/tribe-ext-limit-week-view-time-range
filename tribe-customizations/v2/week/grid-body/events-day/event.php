@@ -52,7 +52,7 @@ $grid_start_time = (int) $ext_options['grid_start_time'];
 $grid_end_time   = (int) $ext_options['grid_end_time'];
 
 /**
- * int containing if we have found the start time of an event based on the CSS class.
+ * Boolean containing if we have found the start time of an event based on the CSS class.
  */
 $found_start_time_class = false;
 
