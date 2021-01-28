@@ -1,0 +1,11 @@
+.tribe-events-pro .tribe-events-pro-week-grid__events-row-wrapper {
+	height: auto;
+}
+
+.tribe-events-pro-week-grid__events-day .tribe-events-pro-week-grid__events-day-gridlines {
+	margin-top: 1px;
+	position: absolute;
+	height: 48px;
+	width: 700%;
+	border-bottom: 1px dashed #e4e4e4;
+}

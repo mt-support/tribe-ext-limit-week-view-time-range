@@ -1,11 +1,11 @@
-=== The Events Calendar PRO Extension: Limit Time Range in Week View ===
+=== The Events Calendar Pro Extension: Limit Week View Time Range ===
 Contributors: ModernTribe
 Donate link: http://m.tri.be/29
 Tags: events, calendar
-Requires at least: 4.5
-Tested up to: 4.9.6
-Requires PHP: 5.4
-Stable tag: 1.0.0
+Requires at least: 4.9.14
+Tested up to: 5.5.1
+Requires PHP: 5.6
+Stable tag: 2.0.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -34,6 +34,12 @@ Please visit our [extension library](https://theeventscalendar.com/extensions/) 
 We're always interested in your feedback and our [premium forums](https://theeventscalendar.com/support-forums/) are the best place to flag any issues. Do note, however, that the degree of support we provide for extensions like this one tends to be very limited.
 
 == Changelog ==
+
+= 2.0.0 2020-11-06 =
+
+* Feature - Extension now works with both legacy (V1) and updated (V2) calendar designs.
+* Feature - Added the option to choose the time format shown on the side of the week view grid for updated calendar designs.
+* Feature - Added the option to show a grid / horizontal lines across the days when using updated (V2) calendar designs.
 
 = 1.0.0 2018-05-18 =
 
