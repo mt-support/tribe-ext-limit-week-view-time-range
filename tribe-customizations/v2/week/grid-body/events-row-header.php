@@ -17,6 +17,17 @@
  * @var array $ext_options An array of the extension settings.
  */
 
+// Get the saved time format
+$time_format = tribe_get_option(
+	'tribe_ext_limit_week_view_time_range_sidebar_time_format',
+	get_option( 'time_format' )
+);
+
+// Fallback to WordPress setting
+if( empty( $time_format ) ) {
+	$time_format = get_option( 'time_format' );
+}
+
 /**
  * Filters the time format in the week view row header.
  *
@@ -26,10 +37,7 @@
  */
 $time_format = apply_filters(
 	'tribe_events_week_sidebar_time_format',
-	tribe_get_option(
-		'tribe_ext_limit_week_view_time_range_sidebar_time_format',
-		'g a'
-	)
+	$time_format
 );
 ?>
 

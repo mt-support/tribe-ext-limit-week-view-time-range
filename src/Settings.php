@@ -303,7 +303,7 @@ if ( ! class_exists( Settings::class ) ) {
 
 		private function get_sidebar_time_format() {
 			$time_format = [
-				'g a'   => '3 pm (default)',
+				''      => esc_html__('Use WordPress setting', 'tribe-ext-limit-week-view-time-range' ) . ' (' . date( get_option( 'time_format' ), '1609509600' ) . ')',
 				'g:i a' => '3:00 pm',
 				'g A'   => '3 PM',
 				'G'     => '15',
