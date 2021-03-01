@@ -1,9 +1,9 @@
 === The Events Calendar Pro Extension: Limit Week View Time Range ===
-Contributors: ModernTribe
-Donate link: http://m.tri.be/29
+Contributors: theeventscalendar
+Donate link: http://evnt.is/29
 Tags: events, calendar
 Requires at least: 4.9.14
-Tested up to: 5.5.1
+Tested up to: 5.6.2
 Requires PHP: 5.6
 Stable tag: 2.0.0
 License: GPL version 3 or any later version
@@ -35,7 +35,7 @@ We're always interested in your feedback and our [premium forums](https://theeve
 
 == Changelog ==
 
-= 2.0.0 2020-11-06 =
+= 2.0.0 2021-03-01 =
 
 * Feature - Extension now works with both legacy (V1) and updated (V2) calendar designs.
 * Feature - Added the option to choose the time format shown on the side of the week view grid for updated calendar designs.

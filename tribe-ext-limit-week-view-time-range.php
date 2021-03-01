@@ -6,8 +6,8 @@
  * Description:       Limit the hour range shown on the week view.
  * Version:           2.0.0
  * Extension Class:   Tribe\Extensions\Limit_Week_View_Time_Range\Main
- * Author:            Modern Tribe, Inc.
- * Author URI:        http://m.tri.be/1971
+ * Author:            The Events Calendar
+ * Author URI:        http://evnt.is/1971
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       tribe-ext-limit-week-view-time-range
