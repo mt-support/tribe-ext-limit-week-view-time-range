@@ -82,7 +82,7 @@ if (
 
 		if ( preg_match( $pattern, $class ) ) {
 			// Remove the old vertical positioning
-			unset( $classes[ $key ] );
+			//unset( $classes[ $key ] );
 
 			// Grab the vertical offset
 			$event_start_time = str_replace( 'tribe-events-pro-week-grid__event--t-', '', $class );
@@ -94,12 +94,7 @@ if (
 			// Hide if...
 			if (
 				// ... time is off the chart (negative start time).
-				$new_event_start_hour <= 0
-				// ... time is in the first 15 minutes of the grid.
-				|| (
-					$grid_start_time === $new_event_start_hour
-					&& (int) $time_split[1] <= 15
-				)
+			 	$new_event_start_hour < 0
 				// ... original time is before the grid start time.
 				|| (int) $time_split[0] < $grid_start_time
 				// ... time + 1 hour is after the grid end time (for long events at the end of the day).
