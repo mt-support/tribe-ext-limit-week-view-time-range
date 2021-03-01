@@ -82,7 +82,7 @@ if (
 
 		if ( preg_match( $pattern, $class ) ) {
 			// Remove the old vertical positioning
-			//unset( $classes[ $key ] );
+			unset( $classes[ $key ] );
 
 			// Grab the vertical offset
 			$event_start_time = str_replace( 'tribe-events-pro-week-grid__event--t-', '', $class );
