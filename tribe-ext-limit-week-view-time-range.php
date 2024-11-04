@@ -3,7 +3,7 @@
  * Plugin Name:       The Events Calendar Pro Extension: Limit Week View Time Range
  * Plugin URI:        https://theeventscalendar.com/extensions/limit-the-time-range-in-week-view/
  * GitHub Plugin URI: https://github.com/mt-support/tribe-ext-limit-week-view-time-range
- * Description:       Limit the hour range shown on the week view.
+ * Description:       Limit the hour range shown on the week view under Events > Settings > Display > Calendar.
  * Version:           2.1.0
  * Extension Class:   Tribe\Extensions\Limit_Week_View_Time_Range\Main
  * Author:            The Events Calendar
@@ -102,6 +102,7 @@ if (
 			add_filter( 'tribe_events_week_get_hours', [ $this, 'filter_week_hours' ] );
 			add_filter( 'tribe_template_path_list', [ $this, 'alternative_week_view_template_locations' ], 10, 2 );
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
+			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'add_settings_link' ] );
 		}
 
 		/**
@@ -290,6 +291,11 @@ if (
 					plugin_dir_url( __FILE__ ) . 'src/resources/style.css'
 				);
 			}
+		}
+
+		public function add_settings_link( $links ) {
+			$links[] = '<a href="' . admin_url( 'edit.php?post_type=tribe_events&page=tec-events-settings&tab=display#tec-settings-events-settings-display-limit-week-view' ) . '">Settings</a>';
+			return $links;
 		}
 
 	} // end class
