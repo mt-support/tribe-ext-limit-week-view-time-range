@@ -3,11 +3,11 @@
  * Plugin Name:       The Events Calendar Pro Extension: Limit Week View Time Range
  * Plugin URI:        https://theeventscalendar.com/extensions/limit-the-time-range-in-week-view/
  * GitHub Plugin URI: https://github.com/mt-support/tribe-ext-limit-week-view-time-range
- * Description:       Limit the hour range shown on the week view.
- * Version:           2.0.0
+ * Description:       Limit the hour range shown on the week view under Events > Settings > Display > Calendar.
+ * Version:           2.1.0
  * Extension Class:   Tribe\Extensions\Limit_Week_View_Time_Range\Main
  * Author:            The Events Calendar
- * Author URI:        http://evnt.is/1971
+ * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       tribe-ext-limit-week-view-time-range
@@ -50,12 +50,12 @@ if (
 		private $settings;
 
 		/**
-		 * Setup the Extension's properties.
+		 * Set up the Extension's properties.
 		 *
 		 * This always executes even if the required plugins are not present.
 		 */
 		public function construct() {
-			$this->add_required_plugin( 'Tribe__Events__Pro__Main', '5.0' );
+			$this->add_required_plugin( 'Tribe__Events__Pro__Main', '7.1.0-dev' );
 		}
 
 		/**
@@ -101,7 +101,8 @@ if (
 
 			add_filter( 'tribe_events_week_get_hours', [ $this, 'filter_week_hours' ] );
 			add_filter( 'tribe_template_path_list', [ $this, 'alternative_week_view_template_locations' ], 10, 2 );
-			add_action( 'wp_enqueue_scripts', [ $this, 'enquque_styles' ] );
+			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
+			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), [ $this, 'add_settings_link' ] );
 		}
 
 		/**
@@ -267,15 +268,38 @@ if (
 		}
 
 		/**
-		 * Enqueuing stylesheet
+		 * Enqueuing stylesheet.
+		 *
+		 * @since      1.0.0
+		 * @deprecated 2.1.0 Fix typo in method name.
 		 */
 		public function enquque_styles() {
+			_deprecated_function( __METHOD__, '2.1.0', 'enqueue_styles' );
+
+			$this->enqueue_styles();
+		}
+
+		/**
+		 * Enqueuing stylesheet.
+		 *
+		 * @since 2.1.0
+		 */
+		public function enqueue_styles() {
 			if ( function_exists( 'tribe_events_views_v2_is_enabled' ) && ! empty( tribe_events_views_v2_is_enabled() ) ) {
 				wp_enqueue_style(
 					'tribe-ext-limit-week-view-time-range',
 					plugin_dir_url( __FILE__ ) . 'src/resources/style.css'
 				);
 			}
+		}
+
+		public function add_settings_link( $links ) {
+			$links[] = sprintf(
+				__( '%1$sSettings%2$s', 'tribe-ext-limit-week-view-time-range' ),
+				'<a href="' . admin_url( 'edit.php?post_type=tribe_events&page=tec-events-settings&tab=display#tec-settings-events-settings-display-limit-week-view' ) . '">',
+				'</a>'
+			);
+			return $links;
 		}
 
 	} // end class

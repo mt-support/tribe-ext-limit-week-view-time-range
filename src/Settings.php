@@ -36,8 +36,13 @@ if ( ! class_exists( Settings::class ) ) {
 
 			$this->set_options_prefix( $options_prefix );
 
-			// Add settings specific to OSM
-			add_action( 'admin_init', [ $this, 'add_settings' ] );
+			/**
+			 * Add settings specific to the extension.
+			 *
+			 * @since 2.0.0 Use the filter instead of hooking into `admin_init`
+			 */
+			add_filter( 'tec_events_settings_display_calendar_section',	[ $this, 'add_settings' ] );
+
 		}
 
 		/**
@@ -95,7 +100,7 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Given an option key, get this extension's option value.
 		 *
-		 * This automatically prepends this extension's option prefix so you can just do `$this->get_option( 'a_setting' )`.
+		 * This automatically prepends this extension's option prefix, so you can just do `$this->get_option( 'a_setting' )`.
 		 *
 		 * @see tribe_get_option()
 		 *
@@ -174,7 +179,7 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Given an option key, delete this extension's option value.
 		 *
-		 * This automatically prepends this extension's option prefix so you can just do `$this->delete_option( 'a_setting' )`.
+		 * This automatically prepends this extension's option prefix, so you can just do `$this->delete_option( 'a_setting' )`.
 		 *
 		 * @param string $key
 		 *
@@ -193,8 +198,13 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Adds a new section of fields to Events > Settings > Display tab, appearing after the "Basic Template" section
 		 * and before the "Date Format Settings" section.
+		 *
+		 * @since 1.0.0
+		 * @since 2.1.0 Update the settings to work with the new admin UI.
+		 *
+		 * @return array
 		 */
-		public function add_settings() {
+		public function add_settings( $settings ) {
 			$start_hours = [
 				0  => '00:00 (default)',
 				1  => '01:00',
@@ -248,10 +258,14 @@ if ( ! class_exists( Settings::class ) ) {
 				24 => '24:00 (default)',
 			];
 
-			$fields = [
+			$fields_setup = [
 				'heading'             => [
 					'type' => 'html',
-					'html' => $this->get_setting_intro_text(),
+					'html' => $this->get_setting_section_title(),
+				],
+				'intro' => [
+					'type' => 'wrapped_html',
+					'html' => $this->get_setting_intro(),
 				],
 				'start_time'          => [
 					'type'            => 'dropdown',
@@ -289,16 +303,18 @@ if ( ! class_exists( Settings::class ) ) {
 			 * Remove 'sidebar_time_format' if using V1
 			 */
 			if ( ! function_exists( 'tribe_events_views_v2_is_enabled' ) || ( function_exists( 'tribe_events_views_v2_is_enabled' ) && empty( tribe_events_views_v2_is_enabled() ) ) ) {
-				unset( $fields['sidebar_time_format'] );
-				unset( $fields['show_grid'] );
+				unset( $fields_setup['sidebar_time_format'] );
+				unset( $fields_setup['show_grid'] );
 			}
 
-			$this->settings_helper->add_fields(
-				$this->prefix_settings_field_keys( $fields ),
-				'display',
-				'enable_month_view_cache',
-				false
-			);
+			$fields = [];
+			foreach( $fields_setup as $key => $value ) {
+				$fields[ $this->get_options_prefix() . $key ] = $value;
+			}
+
+			$fields = tribe( 'settings' )->wrap_section_content( 'tec-events-settings-calendar-daystrip', $fields );
+
+			return array_merge( $settings, $fields );
 		}
 
 		private function get_sidebar_time_format() {
@@ -336,19 +352,33 @@ if ( ! class_exists( Settings::class ) ) {
 		}
 
 		/**
-		 * Here is an example of getting some HTML for the Settings Header.
+		 * The setting section title.
+		 *
+		 * @since 2.1.0 Separate section title and section intro.
 		 *
 		 * @return string
 		 */
-		private function get_setting_intro_text() {
-			$result = '<h3>' . esc_html_x(
+		private function get_setting_section_title() {
+			$result = '<h3  id="tec-settings-events-settings-display-limit-week-view" class="tec-settings-form__section-header tec-settings-form__section-header--sub">';
+			$result .= esc_html_x(
 					'Limit Week View Time Range',
 					'Settings header',
 					'tribe-ext-limit-week-view-time-range'
-				) . '</h3>';
-			$result .= '<div style="margin-left: 20px;">';
-			$result .= '<p>';
-			$result .= esc_html_x(
+				);
+			$result .= '</h3>';
+
+			return $result;
+		}
+
+		/**
+		 * The setting section intro text.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @return string
+		 */
+		private function get_setting_intro() {
+			$result = esc_html_x(
 				'Set up the time range your week view should show. The start hour should be earlier than the end hour.',
 				'Settings',
 				'tribe-ext-limit-week-view-time-range'
@@ -359,8 +389,6 @@ if ( ! class_exists( Settings::class ) ) {
 				'Settings',
 				'tribe-ext-limit-week-view-time-range'
 			);
-			$result .= '</p>';
-			$result .= '</div>';
 
 			return $result;
 		}

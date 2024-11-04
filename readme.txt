@@ -2,10 +2,10 @@
 Contributors: theeventscalendar
 Donate link: http://evnt.is/29
 Tags: events, calendar
-Requires at least: 4.9.14
-Tested up to: 5.6.2
-Requires PHP: 5.6
-Stable tag: 2.0.0
+Requires at least: 6.3.0
+Tested up to: 6.6.2
+Requires PHP: 7.4
+Stable tag: 2.1.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,7 +33,19 @@ Please visit our [extension library](https://theeventscalendar.com/extensions/) 
 
 We're always interested in your feedback and our [premium forums](https://theeventscalendar.com/support-forums/) are the best place to flag any issues. Do note, however, that the degree of support we provide for extensions like this one tends to be very limited.
 
+== Upgrade Notice ==
+= [2.1.0] =
+
+This extension is no longer compatible with versions of Events Calendar Pro prior to 7.1.0.
+Please see the changelog for the complete list of changes in this release.
+
 == Changelog ==
+
+= 2.1.0 2024-11-04 =
+
+* Version - This and future versions of the extension require ECP 7.1.0. It is no longer compatible with the legacy admin design.
+* Fix - Make sure the settings are visible and work with the new TEC admin interface. [TECEXT-339]
+* Tweak - Add a direct link on the Plugins page pointing to the plugin settings.
 
 = 2.0.0 2021-03-01 =
 
