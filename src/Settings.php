@@ -102,7 +102,7 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Given an option key, get this extension's option value.
 		 *
-		 * This automatically prepends this extension's option prefix so you can just do `$this->get_option( 'a_setting' )`.
+		 * This automatically prepends this extension's option prefix, so you can just do `$this->get_option( 'a_setting' )`.
 		 *
 		 * @see tribe_get_option()
 		 *
@@ -181,7 +181,7 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Given an option key, delete this extension's option value.
 		 *
-		 * This automatically prepends this extension's option prefix so you can just do `$this->delete_option( 'a_setting' )`.
+		 * This automatically prepends this extension's option prefix, so you can just do `$this->delete_option( 'a_setting' )`.
 		 *
 		 * @param string $key
 		 *

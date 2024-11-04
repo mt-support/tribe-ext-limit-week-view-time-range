@@ -50,7 +50,7 @@ if (
 		private $settings;
 
 		/**
-		 * Setup the Extension's properties.
+		 * Set up the Extension's properties.
 		 *
 		 * This always executes even if the required plugins are not present.
 		 */
