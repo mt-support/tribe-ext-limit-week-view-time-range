@@ -101,7 +101,7 @@ if (
 
 			add_filter( 'tribe_events_week_get_hours', [ $this, 'filter_week_hours' ] );
 			add_filter( 'tribe_template_path_list', [ $this, 'alternative_week_view_template_locations' ], 10, 2 );
-			add_action( 'wp_enqueue_scripts', [ $this, 'enquque_styles' ] );
+			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 		}
 
 		/**
@@ -267,9 +267,23 @@ if (
 		}
 
 		/**
-		 * Enqueuing stylesheet
+		 * Enqueuing stylesheet.
+		 *
+		 * @since      1.0.0
+		 * @deprecated 2.1.0 Fix typo in method name.
 		 */
 		public function enquque_styles() {
+			_deprecated_function( __METHOD__, '2.1.0', 'enqueue_styles' );
+
+			$this->enqueue_styles();
+		}
+
+		/**
+		 * Enqueuing stylesheet.
+		 *
+		 * @since 2.1.0
+		 */
+		public function enqueue_styles() {
 			if ( function_exists( 'tribe_events_views_v2_is_enabled' ) && ! empty( tribe_events_views_v2_is_enabled() ) ) {
 				wp_enqueue_style(
 					'tribe-ext-limit-week-view-time-range',
