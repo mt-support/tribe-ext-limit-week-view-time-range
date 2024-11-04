@@ -36,7 +36,7 @@ We're always interested in your feedback and our [premium forums](https://theeve
 == Upgrade Notice ==
 = [2.1.0] =
 
-This extension is no longer compatible with versions of Events Calendar Pro 7.1.0.
+This extension is no longer compatible with versions of Events Calendar Pro prior to 7.1.0.
 Please see the changelog for the complete list of changes in this release.
 
 == Changelog ==
