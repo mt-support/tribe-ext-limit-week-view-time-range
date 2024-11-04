@@ -294,7 +294,11 @@ if (
 		}
 
 		public function add_settings_link( $links ) {
-			$links[] = '<a href="' . admin_url( 'edit.php?post_type=tribe_events&page=tec-events-settings&tab=display#tec-settings-events-settings-display-limit-week-view' ) . '">Settings</a>';
+			$links[] = sprintf(
+				__( '%1$sSettings%2$s', 'tribe-ext-limit-week-view-time-range' ),
+				'<a href="' . admin_url( 'edit.php?post_type=tribe_events&page=tec-events-settings&tab=display#tec-settings-events-settings-display-limit-week-view' ) . '">',
+				'</a>'
+			);
 			return $links;
 		}
 

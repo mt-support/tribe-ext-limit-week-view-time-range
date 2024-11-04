@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-11-04T15:11:51+01:00\n"
+"POT-Creation-Date: 2024-11-04T15:40:50+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: tribe-ext-limit-week-view-time-range\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #. Description of the plugin
 #: tribe-ext-limit-week-view-time-range.php
-msgid "Limit the hour range shown on the week view."
+msgid "Limit the hour range shown on the week view under Events > Settings > Display > Calendar."
 msgstr ""
 
 #. Author of the plugin
@@ -107,6 +107,10 @@ msgstr ""
 msgid "Enabling this option will show a grid (light grey dashed horizontal lines at every hour) on week view."
 msgstr ""
 
-#: tribe-ext-limit-week-view-time-range.php:206
+#: tribe-ext-limit-week-view-time-range.php:207
 msgid "%s requires PHP version %s or newer to work. Please contact your website host and inquire about updating PHP."
+msgstr ""
+
+#: tribe-ext-limit-week-view-time-range.php:298
+msgid "%1$sSettings%2$s"
 msgstr ""
