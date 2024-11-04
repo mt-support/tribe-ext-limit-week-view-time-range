@@ -45,6 +45,7 @@ Please see the changelog for the complete list of changes in this release.
 
 * Version - This and future versions of the extension require ECP 7.1.0. It is no longer compatible with the legacy admin design.
 * Fix - Make sure the settings are visible and work with the new TEC admin interface. [TECEXT-339]
+* Tweak - Add a direct link on the Plugins page pointing to the plugin settings.
 
 = 2.0.0 2021-03-01 =
 
