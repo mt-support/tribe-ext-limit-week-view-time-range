@@ -200,6 +200,11 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * Adds a new section of fields to Events > Settings > Display tab, appearing after the "Basic Template" section
 		 * and before the "Date Format Settings" section.
+		 *
+		 * @since 1.0.0
+		 * @since 2.1.0 Update the settings to work with the new admin UI.
+		 *
+		 * @return array
 		 */
 		public function add_settings( $settings ) {
 			$start_hours = [
@@ -351,6 +356,8 @@ if ( ! class_exists( Settings::class ) ) {
 		/**
 		 * The setting section title.
 		 *
+		 * @since 2.1.0 Separate section title and section intro.
+		 *
 		 * @return string
 		 */
 		private function get_setting_section_title() {
@@ -367,6 +374,8 @@ if ( ! class_exists( Settings::class ) ) {
 
 		/**
 		 * The setting section intro text.
+		 *
+		 * @since 2.1.0
 		 *
 		 * @return string
 		 */
