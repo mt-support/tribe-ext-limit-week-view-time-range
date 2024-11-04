@@ -258,7 +258,11 @@ if ( ! class_exists( Settings::class ) ) {
 			$fields_setup = [
 				'heading'             => [
 					'type' => 'html',
-					'html' => $this->get_setting_intro_text(),
+					'html' => $this->get_setting_section_title(),
+				],
+				'intro' => [
+					'type' => 'wrapped_html',
+					'html' => $this->get_setting_intro(),
 				],
 				'start_time'          => [
 					'type'            => 'dropdown',
@@ -345,19 +349,29 @@ if ( ! class_exists( Settings::class ) ) {
 		}
 
 		/**
-		 * Here is an example of getting some HTML for the Settings Header.
+		 * The setting section title.
 		 *
 		 * @return string
 		 */
-		private function get_setting_intro_text() {
-			$result = '<h3  id="tec-settings-events-settings-display-limit-week-view" class="tec-settings-form__section-header tec-settings-form__section-header--sub">' . esc_html_x(
+		private function get_setting_section_title() {
+			$result = '<h3  id="tec-settings-events-settings-display-limit-week-view" class="tec-settings-form__section-header tec-settings-form__section-header--sub">';
+			$result .= esc_html_x(
 					'Limit Week View Time Range',
 					'Settings header',
 					'tribe-ext-limit-week-view-time-range'
-				) . '</h3>';
-			$result .= '<div style="margin-left: 20px;">';
-			$result .= '<p>';
-			$result .= esc_html_x(
+				);
+			$result .= '</h3>';
+
+			return $result;
+		}
+
+		/**
+		 * The setting section intro text.
+		 *
+		 * @return string
+		 */
+		private function get_setting_intro() {
+			$result = esc_html_x(
 				'Set up the time range your week view should show. The start hour should be earlier than the end hour.',
 				'Settings',
 				'tribe-ext-limit-week-view-time-range'
@@ -368,8 +382,6 @@ if ( ! class_exists( Settings::class ) ) {
 				'Settings',
 				'tribe-ext-limit-week-view-time-range'
 			);
-			$result .= '</p>';
-			$result .= '</div>';
 
 			return $result;
 		}
