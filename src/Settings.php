@@ -36,8 +36,6 @@ if ( ! class_exists( Settings::class ) ) {
 
 			$this->set_options_prefix( $options_prefix );
 
-			// Add settings specific to OSM
-			//add_action( 'admin_init', [ $this, 'add_settings' ] );
 			/**
 			 * Add settings specific to the extension.
 			 *
