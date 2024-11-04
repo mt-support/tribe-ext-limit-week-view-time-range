@@ -37,7 +37,14 @@ if ( ! class_exists( Settings::class ) ) {
 			$this->set_options_prefix( $options_prefix );
 
 			// Add settings specific to OSM
-			add_action( 'admin_init', [ $this, 'add_settings' ] );
+			//add_action( 'admin_init', [ $this, 'add_settings' ] );
+			/**
+			 * Add settings specific to the extension.
+			 *
+			 * @since 2.0.0 Use the filter instead of hooking into `admin_init`
+			 */
+			add_filter( 'tec_events_settings_display_calendar_section',	[ $this, 'add_settings' ] );
+
 		}
 
 		/**
@@ -194,7 +201,7 @@ if ( ! class_exists( Settings::class ) ) {
 		 * Adds a new section of fields to Events > Settings > Display tab, appearing after the "Basic Template" section
 		 * and before the "Date Format Settings" section.
 		 */
-		public function add_settings() {
+		public function add_settings( $settings ) {
 			$start_hours = [
 				0  => '00:00 (default)',
 				1  => '01:00',
@@ -248,7 +255,7 @@ if ( ! class_exists( Settings::class ) ) {
 				24 => '24:00 (default)',
 			];
 
-			$fields = [
+			$fields_setup = [
 				'heading'             => [
 					'type' => 'html',
 					'html' => $this->get_setting_intro_text(),
@@ -289,16 +296,18 @@ if ( ! class_exists( Settings::class ) ) {
 			 * Remove 'sidebar_time_format' if using V1
 			 */
 			if ( ! function_exists( 'tribe_events_views_v2_is_enabled' ) || ( function_exists( 'tribe_events_views_v2_is_enabled' ) && empty( tribe_events_views_v2_is_enabled() ) ) ) {
-				unset( $fields['sidebar_time_format'] );
-				unset( $fields['show_grid'] );
+				unset( $fields_setup['sidebar_time_format'] );
+				unset( $fields_setup['show_grid'] );
 			}
 
-			$this->settings_helper->add_fields(
-				$this->prefix_settings_field_keys( $fields ),
-				'display',
-				'enable_month_view_cache',
-				false
-			);
+			$fields = [];
+			foreach( $fields_setup as $key => $value ) {
+				$fields[ $this->get_options_prefix() . $key ] = $value;
+			}
+
+			$fields = tribe( 'settings' )->wrap_section_content( 'tec-events-settings-calendar-daystrip', $fields );
+
+			return array_merge( $settings, $fields );
 		}
 
 		private function get_sidebar_time_format() {
@@ -341,7 +350,7 @@ if ( ! class_exists( Settings::class ) ) {
 		 * @return string
 		 */
 		private function get_setting_intro_text() {
-			$result = '<h3>' . esc_html_x(
+			$result = '<h3  id="tec-settings-events-settings-display-limit-week-view" class="tec-settings-form__section-header tec-settings-form__section-header--sub">' . esc_html_x(
 					'Limit Week View Time Range',
 					'Settings header',
 					'tribe-ext-limit-week-view-time-range'
