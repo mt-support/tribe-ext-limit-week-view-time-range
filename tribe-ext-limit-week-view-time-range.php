@@ -4,10 +4,10 @@
  * Plugin URI:        https://theeventscalendar.com/extensions/limit-the-time-range-in-week-view/
  * GitHub Plugin URI: https://github.com/mt-support/tribe-ext-limit-week-view-time-range
  * Description:       Limit the hour range shown on the week view.
- * Version:           2.0.0
+ * Version:           2.1.0
  * Extension Class:   Tribe\Extensions\Limit_Week_View_Time_Range\Main
  * Author:            The Events Calendar
- * Author URI:        http://evnt.is/1971
+ * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       tribe-ext-limit-week-view-time-range
@@ -55,7 +55,7 @@ if (
 		 * This always executes even if the required plugins are not present.
 		 */
 		public function construct() {
-			$this->add_required_plugin( 'Tribe__Events__Pro__Main', '5.0' );
+			$this->add_required_plugin( 'Tribe__Events__Pro__Main', '7.1.0-dev' );
 		}
 
 		/**
